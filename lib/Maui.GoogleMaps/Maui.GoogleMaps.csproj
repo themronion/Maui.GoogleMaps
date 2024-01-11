@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-	  <PackageReference Include="Xamarin.GooglePlayServices.Maps" Version="118.1.0.1" />
+	  <PackageReference Include="Xamarin.GooglePlayServices.Maps" Version="118.2.0.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
