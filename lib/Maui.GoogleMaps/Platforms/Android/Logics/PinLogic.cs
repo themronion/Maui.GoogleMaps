@@ -344,4 +344,3 @@ internal class PinLogic : DefaultPinLogic<Marker, GoogleMap>
         nativeItem.Alpha = 1f - outerItem.Transparency;
     }
 }
-

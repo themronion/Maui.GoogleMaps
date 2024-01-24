@@ -9,17 +9,25 @@ internal abstract class DefaultPolygonLogic<TNative, TNativeMap> : DefaultLogic<
     protected override void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         base.OnItemPropertyChanged(sender, e);
-        var outerItem = sender as Polygon;
-        var nativeItem = outerItem?.NativeObject as TNative;
 
-        if (nativeItem == null)
+        if (sender is not  Polygon { NativeObject: TNative nativeItem } outerItem)
+        {
             return;
+        }
 
         if (e.PropertyName == Polygon.IsClickableProperty.PropertyName) OnUpdateIsClickable(outerItem, nativeItem);
         else if (e.PropertyName == Polygon.StrokeColorProperty.PropertyName) OnUpdateStrokeColor(outerItem, nativeItem);
         else if (e.PropertyName == Polygon.StrokeWidthProperty.PropertyName) OnUpdateStrokeWidth(outerItem, nativeItem);
         else if (e.PropertyName == Polygon.FillColorProperty.PropertyName) OnUpdateFillColor(outerItem, nativeItem);
         else if (e.PropertyName == Polygon.ZIndexProperty.PropertyName) OnUpdateZIndex(outerItem, nativeItem);
+    }
+
+    protected override void CheckCanCreateNativeItem(Polygon outerItem)
+    {
+        if (outerItem.Positions.Count < 3)
+        {
+            throw new ArgumentException("Polygon must have a 3 positions to be added to a map");
+        }
     }
 
     internal abstract void OnUpdateIsClickable(Polygon outerItem, TNative nativeItem);

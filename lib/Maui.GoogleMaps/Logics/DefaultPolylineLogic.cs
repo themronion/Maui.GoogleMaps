@@ -9,16 +9,24 @@ internal abstract class DefaultPolylineLogic<TNative, TNativeMap> : DefaultLogic
     protected override void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         base.OnItemPropertyChanged(sender, e);
-        var outerItem = sender as Polyline;
-        var nativeItem = outerItem?.NativeObject as TNative;
-
-        if (nativeItem == null)
+        
+        if (sender is not Polyline { NativeObject: TNative nativeItem } outerItem)
+        {
             return;
+        }
 
         if (e.PropertyName == Polyline.IsClickableProperty.PropertyName) OnUpdateIsClickable(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.StrokeColorProperty.PropertyName) OnUpdateStrokeColor(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.StrokeWidthProperty.PropertyName) OnUpdateStrokeWidth(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.ZIndexProperty.PropertyName) OnUpdateZIndex(outerItem, nativeItem);
+    }
+
+    protected override void CheckCanCreateNativeItem(Polyline outerItem)
+    {
+        if (outerItem.Positions.Count < 2)
+        {
+            throw new ArgumentException("Polyline must have a 2 positions to be added to a map");
+        }
     }
 
     internal abstract void OnUpdateIsClickable(Polyline outerItem, TNative nativeItem);

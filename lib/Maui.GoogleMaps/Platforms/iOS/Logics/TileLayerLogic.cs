@@ -50,6 +50,10 @@ internal class TileLayerLogic : DefaultLogic<TileLayer, NativeTileLayer, MapView
         return nativeTileLayer;
     }
 
+    protected override void CheckCanCreateNativeItem(TileLayer outerItem)
+    {
+    }
+
     protected override void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         base.OnItemPropertyChanged(sender, e);

@@ -39,6 +39,10 @@ internal class TileLayerLogic : DefaultLogic<TileLayer, NativeTileOverlay, Googl
         }
     }
 
+    protected override void CheckCanCreateNativeItem(TileLayer outerItem)
+    {
+    }
+
     protected override NativeTileOverlay DeleteNativeItem(TileLayer outerItem)
     {
         if (outerItem.NativeObject is not NativeTileOverlay nativeTileOverlay)

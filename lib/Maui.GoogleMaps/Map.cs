@@ -36,7 +36,7 @@ public class Map : View, IMap, IEnumerable<Pin>
         CameraUpdateFactory.NewPositionZoom(new Position(41.89, 12.49), 10),  // center on Rome by default
         propertyChanged: (bindable, oldValue, newValue) => 
         {
-            ((Map)bindable)._useMoveToRegisonAsInitialBounds = false;   
+            ((Map)bindable)._useMoveToRegisonAsInitialBounds = false;
         });
 
     public static readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(PaddingProperty), typeof(Thickness), typeof(Map), default(Thickness));
@@ -67,6 +67,7 @@ public class Map : View, IMap, IEnumerable<Pin>
     public event EventHandler<MapClickedEventArgs> MapClicked;
     public event EventHandler<MapLongClickedEventArgs> MapLongClicked;
     public event EventHandler<MyLocationButtonClickedEventArgs> MyLocationButtonClicked;
+    public event EventHandler MapReady;
 
     [Obsolete("Please use Map.CameraIdled instead of this")]
     public event EventHandler<CameraChangedEventArgs> CameraChanged;
@@ -92,13 +93,6 @@ public class Map : View, IMap, IEnumerable<Pin>
     public Map()
     {
         VerticalOptions = HorizontalOptions = LayoutOptions.Fill;
-
-        _pins.CollectionChanged += PinsOnCollectionChanged;
-        _polylines.CollectionChanged += PolylinesOnCollectionChanged;
-        _polygons.CollectionChanged += PolygonsOnCollectionChanged;
-        _circles.CollectionChanged += CirclesOnCollectionChanged;
-        _tileLayers.CollectionChanged += TileLayersOnCollectionChanged;
-        _groundOverlays.CollectionChanged += GroundOverlays_CollectionChanged;
     }
 
     public bool IsTrafficEnabled
@@ -212,8 +206,9 @@ public class Map : View, IMap, IEnumerable<Pin>
         {
             if (_visibleRegion == value)
                 return;
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+
+            ArgumentNullException.ThrowIfNull(value);
+
             OnPropertyChanging();
             _visibleRegion = value;
             OnPropertyChanged();
@@ -226,9 +221,12 @@ public class Map : View, IMap, IEnumerable<Pin>
         internal set
         {
             if (_region == value)
+            {
                 return;
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            }
+
+            ArgumentNullException.ThrowIfNull(value);
+
             OnPropertyChanging();
             _region = value;
             OnPropertyChanged();
@@ -283,7 +281,6 @@ public class Map : View, IMap, IEnumerable<Pin>
         return comp.Task;
     }
 
-
     public Task<Stream> TakeSnapshot()
     {
         var comp = new TaskCompletionSource<Stream>();
@@ -291,41 +288,6 @@ public class Map : View, IMap, IEnumerable<Pin>
         SendTakeSnapshot(new TakeSnapshotMessage(image => comp.SetResult(image)));
 
         return comp.Task;
-    }
-
-    void PinsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null && e.NewItems.Cast<Pin>().Any(pin => pin.Label == null))
-            throw new ArgumentException("Pin must have a Label to be added to a map");
-    }
-
-    void PolylinesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null && e.NewItems.Cast<Polyline>().Any(polyline => polyline.Positions.Count < 2))
-            throw new ArgumentException("Polyline must have a 2 positions to be added to a map");
-    }
-
-    void PolygonsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null && e.NewItems.Cast<Polygon>().Any(polygon => polygon.Positions.Count < 3))
-            throw new ArgumentException("Polygon must have a 3 positions to be added to a map");
-    }
-
-    void CirclesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null && e.NewItems.Cast<Circle>().Any(circle => (
-            circle?.Center == null || circle?.Radius == null || circle.Radius.Meters <= 0f)))
-            throw new ArgumentException("Circle must have a center and radius");
-    }
-
-    void TileLayersOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        //if (e.NewItems != null && e.NewItems.Cast<ITileLayer>().Any(tileLayer => (circle.Center == null || circle.Radius == null || circle.Radius.Meters <= 0f)))
-        //  throw new ArgumentException("Circle must have a center and radius");
-    }
-
-    void GroundOverlays_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
     }
 
     internal void SendSelectedPinChanged(Pin selectedPin)
@@ -408,6 +370,11 @@ public class Map : View, IMap, IEnumerable<Pin>
     internal void SendCameraIdled(CameraPosition position)
     {
         CameraIdled?.Invoke(this, new CameraIdledEventArgs(position));
+    }
+
+    internal void SendMapReady()
+    {
+        MapReady?.Invoke(this, EventArgs.Empty);
     }
 
     private void SendMoveToRegion(MoveToRegionMessage message)

@@ -36,19 +36,6 @@ internal sealed class CameraLogic : BaseCameraLogic<GoogleMap>
         base.Unregister();
     }
 
-    private void UnsubscribeCameraEvents(GoogleMap nativeMap)
-    {
-        if (nativeMap == null)
-        {
-            return;
-        }
-        
-        nativeMap.CameraChange -= OnNativeMapCameraChange;
-        nativeMap.CameraMoveStarted -= OnNativeMapCameraMoveStarted;
-        nativeMap.CameraMove -= OnNativeMapCameraMove;
-        nativeMap.CameraIdle -= OnNativeMapCameraIdle;
-    }
-
     public override void OnMoveToRegionRequest(MoveToRegionMessage m)
     {
         if (_nativeMap == null)
@@ -87,11 +74,6 @@ internal sealed class CameraLogic : BaseCameraLogic<GoogleMap>
         m.Callback.OnFinished();
     }
 
-    internal void MoveCamera(CameraUpdate update)
-    {
-        _nativeMap.MoveCamera(update.ToAndroid(ScaledDensity));
-    }
-
     public override void OnAnimateCameraRequest(CameraUpdateMessage m)
     {
         var update = m.Update.ToAndroid(ScaledDensity);
@@ -107,6 +89,24 @@ internal sealed class CameraLogic : BaseCameraLogic<GoogleMap>
         {
             _nativeMap.AnimateCamera(update, cancellableCallback);
         }
+    }
+
+    internal void MoveCamera(CameraUpdate update)
+    {
+        _nativeMap.MoveCamera(update.ToAndroid(ScaledDensity));
+    }
+
+    private void UnsubscribeCameraEvents(GoogleMap nativeMap)
+    {
+        if (nativeMap == null)
+        {
+            return;
+        }
+
+        nativeMap.CameraChange -= OnNativeMapCameraChange;
+        nativeMap.CameraMoveStarted -= OnNativeMapCameraMoveStarted;
+        nativeMap.CameraMove -= OnNativeMapCameraMove;
+        nativeMap.CameraIdle -= OnNativeMapCameraIdle;
     }
 
     private void OnNativeMapCameraChange(object sender, CameraChangeEventArgs e)

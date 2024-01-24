@@ -31,6 +31,14 @@ internal abstract class DefaultPinLogic<TNative, TNativeMap> : DefaultLogic<Pin,
         else if (e.PropertyName == Pin.TransparencyProperty.PropertyName) OnUpdateTransparency(outerItem, nativeItem);
     }
 
+    protected override void CheckCanCreateNativeItem(Pin outerItem)
+    {
+        if (outerItem.Label == null)
+        {
+            throw new ArgumentException("Pin must have a Label to be added to a map");
+        }
+    }
+
     protected abstract void OnUpdateAddress(Pin outerItem, TNative nativeItem);
 
     protected abstract void OnUpdateLabel(Pin outerItem, TNative nativeItem);
@@ -57,4 +65,3 @@ internal abstract class DefaultPinLogic<TNative, TNativeMap> : DefaultLogic<Pin,
 
     protected abstract void OnUpdateTransparency(Pin outerItem, TNative nativeItem);
 }
-

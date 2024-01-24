@@ -15,6 +15,8 @@ internal abstract class DefaultLogic<TOuter, TNative, TNativeMap> : BaseLogic<TN
     protected override INotifyCollectionChanged GetItemAsNotifyCollectionChanged(Map map) =>
         GetItems(map) as INotifyCollectionChanged;
 
+    protected abstract void CheckCanCreateNativeItem(TOuter outerItem);
+
     protected abstract TNative CreateNativeItem(TOuter outerItem);
 
     protected abstract TNative DeleteNativeItem(TOuter outerItem);
@@ -22,22 +24,28 @@ internal abstract class DefaultLogic<TOuter, TNative, TNativeMap> : BaseLogic<TN
     protected override void AddItems(IList newItems)
     {
         if (NativeMap == null)
+        {
             return;
+        }
 
         foreach (TOuter outerItem in newItems)
         {
+            CheckCanCreateNativeItem(outerItem);
             outerItem.PropertyChanged += OnItemPropertyChanged;
             var nat = CreateNativeItem(outerItem);
             if (nat != null)
+            {
                 _outerItems.Add(outerItem);
+            }
         }
     }
 
     protected override void RemoveItems(IList oldItems)
     {
-        var map = NativeMap;
-        if (map == null)
+        if (NativeMap == null)
+        {
             return;
+        }
 
         foreach (TOuter outerShape in oldItems)
         {
@@ -65,23 +73,28 @@ internal abstract class DefaultLogic<TOuter, TNative, TNativeMap> : BaseLogic<TN
         var items = GetItems(Map);
 
         // Delete native items if exists
-        foreach (var item in items ?? new List<TOuter>())
+        if (items is not null)
         {
-            try
+            foreach (var item in items)
             {
-                DeleteNativeItem(item);
-            }
-            catch (Exception)
-            {
-                // TODO printf in DebugMode
+                try
+                {
+                    DeleteNativeItem(item);
+                }
+                catch (Exception)
+                {
+                    // TODO printf in DebugMode
+                }
             }
         }
 
         AddItems((IList)items);
     }
 
-    internal override void NotifyReset() =>
+    internal override void NotifyReset()
+    {
         OnCollectionChanged(GetItems(Map), new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+    }
 
     protected virtual void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
