@@ -163,10 +163,15 @@ namespace Maui.GoogleMaps.Handlers
 
         void OnSnapshot(TakeSnapshotMessage snapshotMessage)
         {
-            UIGraphics.BeginImageContextWithOptions(NativeMap.Frame.Size, false, 0f);
-            NativeMap.Layer.RenderInContext(UIGraphics.GetCurrentContext());
-            var snapshot = UIGraphics.GetImageFromCurrentImageContext();
-            UIGraphics.EndImageContext();
+            var renderer = new UIGraphicsImageRenderer(NativeMap.Bounds.Size, new UIGraphicsImageRendererFormat
+            {
+                Opaque = false,
+                Scale = 0f
+            });
+            var snapshot = renderer.CreateImage(ctx =>
+            {
+                NativeMap.DrawViewHierarchy(NativeMap.Bounds, true);
+            });
 
             // Why using task? Because Android side is asynchronous. 
             Task.Run(() =>
