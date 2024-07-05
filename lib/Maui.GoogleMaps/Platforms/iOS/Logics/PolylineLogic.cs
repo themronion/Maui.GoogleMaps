@@ -2,6 +2,12 @@
 using Microsoft.Maui.Platform;
 using Maui.GoogleMaps.iOS.Extensions;
 using NativePolyline = Google.Maps.Polyline;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls.Shapes;
+using System.ComponentModel;
+using Foundation;
+using System.IO;
+using UIKit;
 
 namespace Maui.GoogleMaps.Logics.iOS;
 
@@ -9,7 +15,7 @@ internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, MapView>
 {
     internal override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
     {
-        base.Register(oldNativeMap,oldMap, newNativeMap, newMap, handler);
+        base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
         if (newNativeMap != null)
         {
@@ -34,9 +40,9 @@ internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, MapView>
         var path = outerItem.Positions.ToMutablePath();
         var nativePolyline = NativePolyline.FromPath(path);
         nativePolyline.StrokeWidth = outerItem.StrokeWidth;
-        nativePolyline.StrokeColor = outerItem.StrokeColor.ToPlatform();
         nativePolyline.Tappable = outerItem.IsClickable;
         nativePolyline.ZIndex = outerItem.ZIndex;
+        nativePolyline.Spans = GenerateLinePattern(outerItem);
 
         outerItem.NativeObject = nativePolyline;
         nativePolyline.Map = NativeMap;
@@ -82,5 +88,18 @@ internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, MapView>
     internal override void OnUpdateZIndex(Polyline outerItem, NativePolyline nativeItem)
     {
         nativeItem.ZIndex = outerItem.ZIndex;
+    }
+
+    internal override void OnUpdateLinePattern(Polyline outerItem, NativePolyline nativeItem)
+    {
+        nativeItem.Spans = GenerateLinePattern(outerItem);
+    }
+
+    internal StyleSpan[] GenerateLinePattern(Polyline line)
+    {
+        if (line.StrokePattern == null || line.StrokePattern.Type == LineTypes.Straight)
+            return GeometryUtils.StyleSpans(line.Positions.ToMutablePath(), new[] { StrokeStyle.GetSolidColor(line.StrokeColor.ToPlatform()) }, new NSNumber[] { 10 }, LengthKind.Rhumb);
+        else
+            return GeometryUtils.StyleSpans(line.Positions.ToMutablePath(), new[] { StrokeStyle.GetSolidColor(UIColor.Clear), StrokeStyle.GetSolidColor(line.StrokeColor.ToPlatform()) }, new NSNumber[] { line.StrokePattern.GapWidth, line.StrokePattern.DashWidth }, LengthKind.Rhumb);
     }
 }

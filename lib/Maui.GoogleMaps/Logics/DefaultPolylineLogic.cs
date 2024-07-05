@@ -9,7 +9,6 @@ internal abstract class DefaultPolylineLogic<TNative, TNativeMap> : DefaultLogic
     protected override void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         base.OnItemPropertyChanged(sender, e);
-        
         if (sender is not Polyline { NativeObject: TNative nativeItem } outerItem)
         {
             return;
@@ -19,6 +18,8 @@ internal abstract class DefaultPolylineLogic<TNative, TNativeMap> : DefaultLogic
         else if (e.PropertyName == Polyline.StrokeColorProperty.PropertyName) OnUpdateStrokeColor(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.StrokeWidthProperty.PropertyName) OnUpdateStrokeWidth(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.ZIndexProperty.PropertyName) OnUpdateZIndex(outerItem, nativeItem);
+        else if (e.PropertyName == Polyline.StrokePatternProperty.PropertyName) OnUpdateLinePattern(outerItem, nativeItem);
+
     }
 
     protected override void CheckCanCreateNativeItem(Polyline outerItem)
@@ -33,4 +34,5 @@ internal abstract class DefaultPolylineLogic<TNative, TNativeMap> : DefaultLogic
     internal abstract void OnUpdateStrokeColor(Polyline outerItem, TNative nativeItem);
     internal abstract void OnUpdateStrokeWidth(Polyline outerItem, TNative nativeItem);
     internal abstract void OnUpdateZIndex(Polyline outerItem, TNative nativeItem);
+    internal abstract void OnUpdateLinePattern(Polyline outerItem, TNative nativeItem);
 }

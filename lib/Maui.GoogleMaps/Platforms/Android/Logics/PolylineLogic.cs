@@ -3,6 +3,7 @@ using Android.Gms.Maps.Model;
 using Maui.GoogleMaps.Android;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using NativePolyline = Android.Gms.Maps.Model.Polyline;
+using NativePatternItem = Android.Gms.Maps.Model.PatternItem;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
@@ -41,6 +42,7 @@ internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
         opts.InvokeColor(outerItem.StrokeColor.ToAndroid());
         opts.Clickable(outerItem.IsClickable);
         opts.InvokeZIndex(outerItem.ZIndex);
+        opts.InvokePattern(GenerateLinePattern(outerItem.StrokePattern));
 
         var nativePolyline = NativeMap.AddPolyline(opts);
 
@@ -100,5 +102,20 @@ internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
     internal override void OnUpdateZIndex(Polyline outerItem, NativePolyline nativeItem)
     {
         nativeItem.ZIndex = outerItem.ZIndex;
+    }
+
+    internal override void OnUpdateLinePattern(Polyline outerItem, NativePolyline nativeItem)
+    {
+        nativeItem.Pattern = GenerateLinePattern(outerItem.StrokePattern);
+    }
+
+    internal List<NativePatternItem> GenerateLinePattern(LinePattern pattern)
+    {
+        if (pattern == null || pattern.Type == LineTypes.Straight)
+            return null;
+        else if (pattern.Type == LineTypes.Dashed)
+            return new List<NativePatternItem>() { new Dash(pattern.DashWidth), new Gap(pattern.GapWidth), new Dash(pattern.DashWidth) };
+        else
+            return new List<NativePatternItem>() { new Dot(), new Gap(pattern.GapWidth), new Dot() };
     }
 }
