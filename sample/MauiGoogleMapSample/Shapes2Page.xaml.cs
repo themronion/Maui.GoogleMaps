@@ -36,6 +36,26 @@ namespace MauiGoogleMapSample
             map.Polylines.Add(CreateShiftedPolyline(polyline1, 0d, 0.05d, Colors.Yellow));
             map.Polylines.Add(CreateShiftedPolyline(polyline1, 0d, 0.10d, Colors.Green));
 
+            //Add Dashed Polyline
+            var polylineDashed = new Polyline();
+            polylineDashed.StrokeWidth = 10f;
+            polylineDashed.StrokeColor = Colors.Green;
+            polylineDashed.Positions.Add(new Position(36.20, 139.83));
+            polylineDashed.Positions.Add(new Position(36.30, 139.93));
+            polylineDashed.Positions.Add(new Position(36.40, 140.03));
+            polylineDashed.StrokePattern = StrokePatternBuilder.DashedLine();
+            map.Polylines.Add(polylineDashed);
+
+            //Add Dotted Polyline (appears as dashed on iOS)
+            var polylineDotted = new Polyline();
+            polylineDotted.StrokeWidth = 10f;
+            polylineDotted.StrokeColor = Colors.Orange;
+            polylineDotted.Positions.Add(new Position(36.50, 139.83));
+            polylineDotted.Positions.Add(new Position(36.60, 139.93));
+            polylineDotted.Positions.Add(new Position(36.70, 140.03));
+            polylineDotted.StrokePattern = StrokePatternBuilder.DottedLine();
+            map.Polylines.Add(polylineDotted);
+
             // Add Circles
             var circle1 = new Circle();
             circle1.StrokeWidth = 10f;
@@ -85,7 +105,6 @@ namespace MauiGoogleMapSample
             var poly = new Polyline();
             poly.StrokeWidth = polyline.StrokeWidth;
             poly.StrokeColor = color;
-
             foreach (var p in polyline.Positions)
             {
                 poly.Positions.Add(new Position(p.Latitude + shiftLat, p.Longitude + shiftLon));
@@ -105,7 +124,5 @@ namespace MauiGoogleMapSample
 
             return cir;
         }
-
-
     }
 }

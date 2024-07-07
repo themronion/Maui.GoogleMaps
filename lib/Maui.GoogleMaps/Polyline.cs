@@ -9,6 +9,7 @@ public sealed class Polyline : BindableObject
     public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Polyline), Colors.Blue);
     public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Polyline), false);
     public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Polyline), 0);
+    public static readonly BindableProperty StrokePatternProperty = BindableProperty.Create(nameof(StrokePattern), typeof(LinePattern), typeof(Polyline), StrokePatternBuilder.SolidLine());
 
     private readonly ObservableCollection<Position> _positions = new ObservableCollection<Position>();
 
@@ -36,6 +37,12 @@ public sealed class Polyline : BindableObject
     {
         get { return (int)GetValue(ZIndexProperty); }
         set { SetValue(ZIndexProperty, value); }
+    }
+
+    public LinePattern StrokePattern
+    {
+        get { return (LinePattern)GetValue(StrokePatternProperty); }
+        set { SetValue(StrokePatternProperty, value); }
     }
 
     public IList<Position> Positions
@@ -82,5 +89,37 @@ public sealed class Polyline : BindableObject
     {
         _positionsChangedHandler?.Invoke(this, e);
     }
+}
+
+public static class StrokePatternBuilder
+{
+    public static LinePattern SolidLine()
+    {
+        return null;
+    }
+
+    public static LinePattern DashedLine(int gapWidth = 10, int dashWidth = 20)
+    {
+        return new LinePattern { Type = LineTypes.Dashed, DashWidth = dashWidth, GapWidth = gapWidth };
+    }
+
+    public static LinePattern DottedLine(int gapWidth = 5, int dashWidth = 50)
+    {
+        return new LinePattern { Type = LineTypes.Dotted, GapWidth = gapWidth, DashWidth = dashWidth };
+    }
+}
+
+public class LinePattern
+{
+    public int Type { get; set; }
+    public int GapWidth { get; set; }
+    public int DashWidth { get; set; }
+}
+
+public static class LineTypes
+{
+    public static int Straight = 0;
+    public static int Dotted = 1;
+    public static int Dashed = 2;
 }
 
