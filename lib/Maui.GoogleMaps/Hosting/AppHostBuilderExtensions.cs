@@ -1,4 +1,5 @@
 ﻿using Maui.GoogleMaps.Handlers;
+
 using Microsoft.Maui.LifecycleEvents;
 
 namespace Maui.GoogleMaps.Hosting;
@@ -14,7 +15,10 @@ public static class AppHostBuilderExtensions
         )
     {
         appBuilder
-            .ConfigureMauiHandlers(handlers => handlers.AddTransient(typeof(Map), h => new MapHandler()))
+            .ConfigureMauiHandlers(handlers =>
+                handlers.AddHandler<Map, MapHandler>()
+                        .AddHandler<MvvmMap, MvvmMapHandler>()
+            )
             .ConfigureLifecycleEvents(events =>
             {
 #if ANDROID

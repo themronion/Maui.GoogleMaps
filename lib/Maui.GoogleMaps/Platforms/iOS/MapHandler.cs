@@ -1,11 +1,14 @@
 ﻿using Google.Maps;
-using UIKit;
+
 using Maui.GoogleMaps.Internals;
-using GCameraPosition = Google.Maps.CameraPosition;
 using Maui.GoogleMaps.iOS;
-using Maui.GoogleMaps.Logics.iOS;
-using Maui.GoogleMaps.Logics;
 using Maui.GoogleMaps.iOS.Extensions;
+using Maui.GoogleMaps.Logics;
+using Maui.GoogleMaps.Logics.iOS;
+
+using UIKit;
+
+using GCameraPosition = Google.Maps.CameraPosition;
 
 namespace Maui.GoogleMaps.Handlers
 {
@@ -46,15 +49,15 @@ namespace Maui.GoogleMaps.Handlers
 
         protected override void ConnectHandler(MapView platformView)
         {
-            Logics = new List<BaseLogic<MapView>>
-            {
+            Logics =
+            [
                 new PolylineLogic(),
                 new PolygonLogic(),
                 new CircleLogic(),
                 new PinLogic(Config.GetImageFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
                 new TileLayerLogic(),
                 new GroundOverlayLogic(Config.GetImageFactory())
-            };
+            ];
 
             _cameraLogic = new CameraLogic(() =>
             {
@@ -110,7 +113,7 @@ namespace Maui.GoogleMaps.Handlers
 
             base.DisconnectHandler(platformView);
         }
-        
+
         public static void MapMapType(MapHandler handler, Map map)
         {
             handler.NativeMap.MapType = map.MapType switch
@@ -125,7 +128,7 @@ namespace Maui.GoogleMaps.Handlers
         }
         public static void MapPadding(MapHandler handler, Map map)
         {
-           handler.NativeMap.Padding = map.Padding.ToUIEdgeInsets();
+            handler.NativeMap.Padding = map.Padding.ToUIEdgeInsets();
         }
         public static void MapIsTrafficEnabled(MapHandler handler, Map map)
         {
@@ -133,7 +136,7 @@ namespace Maui.GoogleMaps.Handlers
         }
         public static void MapIsIndoorEnabled(MapHandler handler, Map map)
         {
-           handler.NativeMap.IndoorEnabled = map.IsIndoorEnabled;
+            handler.NativeMap.IndoorEnabled = map.IsIndoorEnabled;
         }
         public static void MapMyLocationEnabled(MapHandler handler, Map map)
         {
