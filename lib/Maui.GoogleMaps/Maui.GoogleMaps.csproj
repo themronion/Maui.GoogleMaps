@@ -11,8 +11,11 @@
 		<Title>Maui.GoogleMaps</Title>
 		<PackageVersion>5.1.0</PackageVersion>
 		<PackageReleaseNotes>
-			# 5.1.0
-			- Added MvvmMap control, which has a lot of useful bindings, has support for custom info window.
+# 5.1.0
+- Added MvvmMap control, which has a lot of useful bindings, has support for custom info window.
+- Added ability to allow different patterns on polylines (Android: dashed and dotted lines, iOS: dashed lines only at this point)
+- Fixed snapshots on iOS 17+
+- MAUI update
 		</PackageReleaseNotes>
 		<Authors>themronion</Authors>
 		<Copyright>Copyright 2022-2024</Copyright>
@@ -33,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.14" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
