@@ -9,10 +9,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<PackageId>Onion.Maui.GoogleMaps</PackageId>
 		<Title>Maui.GoogleMaps</Title>
-		<PackageVersion>5.0.3</PackageVersion>
+		<PackageVersion>5.1.0</PackageVersion>
 		<PackageReleaseNotes>
-# 5.0.3
-- Refactoring + optimized pin display on Android
+			# 5.1.0
+			- Added MvvmMap control, which has a lot of useful bindings, has support for custom info window.
 		</PackageReleaseNotes>
 		<Authors>themronion</Authors>
 		<Copyright>Copyright 2022-2024</Copyright>

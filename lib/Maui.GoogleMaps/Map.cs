@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Maui.GoogleMaps.Internals;
-using Maui.GoogleMaps.Helpers;
-using Maui.GoogleMaps.Extensions;
 using System.ComponentModel;
+
+using Maui.GoogleMaps.Extensions;
+using Maui.GoogleMaps.Helpers;
+using Maui.GoogleMaps.Internals;
 
 namespace Maui.GoogleMaps;
 
@@ -22,7 +23,7 @@ public class Map : View, IMap, IEnumerable<Pin>
     public static readonly BindableProperty MapTypeProperty = BindableProperty.Create(nameof(MapType), typeof(MapType), typeof(Map), default(MapType));
 
     public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(Map), default(bool));
-    
+
     public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(Map), default(Pin), defaultBindingMode: BindingMode.TwoWay);
 
     public static readonly BindableProperty IsTrafficEnabledProperty = BindableProperty.Create(nameof(IsTrafficEnabled), typeof(bool), typeof(Map), false);
@@ -34,7 +35,7 @@ public class Map : View, IMap, IEnumerable<Pin>
         typeof(CameraUpdate),
         typeof(Map),
         CameraUpdateFactory.NewPositionZoom(new Position(41.89, 12.49), 10),  // center on Rome by default
-        propertyChanged: (bindable, oldValue, newValue) => 
+        propertyChanged: (bindable, oldValue, newValue) =>
         {
             ((Map)bindable)._useMoveToRegisonAsInitialBounds = false;
         });
@@ -81,7 +82,7 @@ public class Map : View, IMap, IEnumerable<Pin>
 
     internal Action<CameraUpdateMessage> OnAnimateCamera { get; set; }
 
-    internal Action<TakeSnapshotMessage> OnSnapshot{ get; set; }
+    internal Action<TakeSnapshotMessage> OnSnapshot { get; set; }
 
     internal Func<Point, Position> OnFromScreenLocation { get; set; }
     internal Func<Position, Point> OnToScreenLocation { get; set; }
@@ -103,8 +104,8 @@ public class Map : View, IMap, IEnumerable<Pin>
 
     public bool IsIndoorEnabled
     {
-        get { return (bool) GetValue(IsIndoorEnabledProperty); }
-        set { SetValue(IsIndoorEnabledProperty, value);}
+        get { return (bool)GetValue(IsIndoorEnabledProperty); }
+        set { SetValue(IsIndoorEnabledProperty, value); }
     }
 
     public bool MyLocationEnabled
@@ -264,7 +265,7 @@ public class Map : View, IMap, IEnumerable<Pin>
         var comp = new TaskCompletionSource<AnimationStatus>();
 
         SendMoveCamera(new CameraUpdateMessage(cameraUpdate, null, new DelegateAnimationCallback(
-            () => comp.SetResult(AnimationStatus.Finished), 
+            () => comp.SetResult(AnimationStatus.Finished),
             () => comp.SetResult(AnimationStatus.Canceled))));
 
         return comp.Task;

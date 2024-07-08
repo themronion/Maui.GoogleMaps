@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Handlers;
+
 #if ANDROID
 using MapView = Android.Gms.Maps.MapView;
 #elif IOS
@@ -24,7 +25,12 @@ public partial class MapHandler : ViewHandler<Map, MapView>
 #endif
     };
 
-    public MapHandler() : base(MapMapper)
+    public MapHandler() : this(MapMapper)
+    {
+    }
+
+    public MapHandler(IPropertyMapper mapper, CommandMapper? commandMapper = null)
+        : base(mapper, commandMapper)
     {
     }
 
