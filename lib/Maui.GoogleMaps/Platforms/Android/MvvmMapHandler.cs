@@ -15,6 +15,8 @@ public partial class MvvmMapHandler
     {
         base.OnMapReady();
 
+        MapMinMaxZoomLevel(this, VirtualView as MvvmMap);
+
         SetupInfoWindowAdapter();
     }
 
@@ -27,6 +29,8 @@ public partial class MvvmMapHandler
 
     public static void MapMinMaxZoomLevel(MvvmMapHandler handler, MvvmMap map)
     {
+        if (handler.NativeMap is null) return;
+
         handler.NativeMap.SetMinZoomPreference(map.MinZoomLevel);
         handler.NativeMap.SetMaxZoomPreference(map.MaxZoomLevel);
     }
