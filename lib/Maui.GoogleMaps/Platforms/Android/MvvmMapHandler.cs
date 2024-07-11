@@ -62,8 +62,7 @@ public class InfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
 
         var platformView = view.ToPlatform(Map.Handler.MauiContext);
 
-        var request = view.Measure(this.Map.Width - 50, double.PositiveInfinity, MeasureFlags.IncludeMargins);
-        view.Layout(new Rect(0, 0, request.Request.Width, request.Request.Height));
+        var request = view.Measure(this.Map.Width - (int)platformView.Context.ToPixels(20), double.PositiveInfinity, MeasureFlags.IncludeMargins);
 
         platformView.LayoutParameters = new LayoutParams((int)platformView.Context.ToPixels(request.Request.Width), (int)platformView.Context.ToPixels(request.Request.Height));
 
