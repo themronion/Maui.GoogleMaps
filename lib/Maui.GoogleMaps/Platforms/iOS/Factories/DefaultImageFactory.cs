@@ -1,18 +1,17 @@
-﻿using Foundation;
-using UIKit;
+﻿using System.Collections.Concurrent;
+using Foundation;
 using Microsoft.Maui.Platform;
-using System.Collections.Concurrent;
+using UIKit;
 
 namespace Maui.GoogleMaps.iOS.Factories;
 
 public sealed class DefaultImageFactory : IImageFactory
 {
-    private static readonly Lazy<DefaultImageFactory> _instance
-        = new Lazy<DefaultImageFactory>(() => new DefaultImageFactory());
+    private static readonly Lazy<DefaultImageFactory> _instance = new(() => new());
 
     public static DefaultImageFactory Instance => _instance.Value;
 
-    private readonly ConcurrentDictionary<string, UIImage> _cacheDictionary = new();
+    private readonly ConcurrentDictionary<string, UIImage> _cacheDictionary = [];
 
     private DefaultImageFactory()
     {
@@ -59,8 +58,7 @@ public sealed class DefaultImageFactory : IImageFactory
 
             case BitmapDescriptorType.View:
                 var iconView = descriptor.View();
-                var nativeView = Utils.ConvertMauiToNative(iconView, mauiContext);
-                var image = Utils.ConvertViewToImage(nativeView);
+                var image = Utils.ConvertMauiViewToImage(iconView, mauiContext);
                 return image;
 
             default:

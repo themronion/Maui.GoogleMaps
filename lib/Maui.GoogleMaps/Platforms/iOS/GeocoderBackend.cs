@@ -33,9 +33,8 @@ internal class GeocoderBackend
         var source = new TaskCompletionSource<IEnumerable<string>>();
         geocoder.ReverseGeocodeLocation(location, (placemarks, error) =>
         {
-            if (placemarks == null)
-                placemarks = new CLPlacemark[0];
-            IEnumerable<string> addresses = placemarks.Select(p => ABAddressFormatting.ToString(p.AddressDictionary, false));
+            placemarks ??= Array.Empty<CLPlacemark>();
+            var addresses = placemarks.Select(p => ABAddressFormatting.ToString(p.AddressDictionary, false));
             source.SetResult(addresses);
         });
         return source.Task;
@@ -48,7 +47,7 @@ internal class GeocoderBackend
         geocoder.GeocodeAddress(address, (placemarks, error) =>
         {
             placemarks ??= Array.Empty<CLPlacemark>();
-            IEnumerable<Position> positions = placemarks.Select(p => new Position(p.Location.Coordinate.Latitude, p.Location.Coordinate.Longitude));
+            var positions = placemarks.Select(p => new Position(p.Location.Coordinate.Latitude, p.Location.Coordinate.Longitude));
             source.SetResult(positions);
         });
         return source.Task;

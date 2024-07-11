@@ -32,7 +32,7 @@ public partial class MvvmMapHandler : MapHandler
 
         var platformView = view.ToPlatform(Map.Handler.MauiContext);
 
-        var request = view.Measure(this.Map.Width - 50, double.PositiveInfinity, MeasureFlags.IncludeMargins);
+        var request = view.Measure(this.Map.Width - 20, double.PositiveInfinity, MeasureFlags.IncludeMargins);
         view.Layout(new Rect(0, 0, request.Request.Width, request.Request.Height));
 
         platformView.Bounds = view.Bounds;
