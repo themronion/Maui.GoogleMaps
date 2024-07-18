@@ -1,5 +1,5 @@
 ﻿using Google.Maps;
-
+using Maui.GoogleMaps.Clustering.iOS;
 using Maui.GoogleMaps.Internals;
 using Maui.GoogleMaps.iOS;
 using Maui.GoogleMaps.iOS.Extensions;
@@ -49,15 +49,7 @@ namespace Maui.GoogleMaps.Handlers
 
         protected override void ConnectHandler(MapView platformView)
         {
-            Logics =
-            [
-                new PolylineLogic(),
-                new PolygonLogic(),
-                new CircleLogic(),
-                new PinLogic(Config.GetImageFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
-                new TileLayerLogic(),
-                new GroundOverlayLogic(Config.GetImageFactory())
-            ];
+            InitLogics();
 
             _cameraLogic = new CameraLogic(() =>
             {
@@ -88,6 +80,18 @@ namespace Maui.GoogleMaps.Handlers
 
             base.ConnectHandler(platformView);
         }
+
+        protected virtual void InitLogics() => Logics =
+        [
+            new PolylineLogic(),
+                    new PolygonLogic(),
+                    new CircleLogic(),
+                    Map.ClusterOptions.MinimumClusterSize > 1
+                    ? new PinLogic(Config.GetImageFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted)
+                    : new ClusterLogic(Config.ImageFactory, OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
+                    new TileLayerLogic(),
+                    new GroundOverlayLogic(Config.GetImageFactory())
+        ];
 
         protected override void DisconnectHandler(MapView platformView)
         {

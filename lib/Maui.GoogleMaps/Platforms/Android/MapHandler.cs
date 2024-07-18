@@ -5,6 +5,7 @@ using Android.OS;
 using Maui.GoogleMaps.Android;
 using Maui.GoogleMaps.Android.Callbacks;
 using Maui.GoogleMaps.Android.Extensions;
+using Maui.GoogleMaps.Clustering.Android;
 using Maui.GoogleMaps.Internals;
 using Maui.GoogleMaps.Logics;
 using Maui.GoogleMaps.Logics.Android;
@@ -71,15 +72,7 @@ public partial class MapHandler
     {
         _cameraLogic = new CameraLogic(UpdateVisibleRegion);
 
-        Logics = new List<BaseLogic<GoogleMap>>
-        {
-            new PolylineLogic(),
-            new PolygonLogic(),
-            new CircleLogic(),
-            new PinLogic(Config.GetBitmapdescriptionFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
-            new TileLayerLogic(),
-            new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
-        };
+        InitLogics();
 
         var activity = Platform.CurrentActivity;
 
@@ -105,6 +98,18 @@ public partial class MapHandler
 
         base.ConnectHandler(platformView);
     }
+
+    protected virtual void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>
+        {
+            new PolylineLogic(),
+            new PolygonLogic(),
+            new CircleLogic(),
+            Map.ClusterOptions.MinimumClusterSize > 1
+            ? new ClusterLogic(this.Context, Config.GetBitmapdescriptionFactory(), OnClusteredMarkerCreating, OnClusteredMarkerCreated, OnClusteredMarkerDeleting, OnClusteredMarkerDeleted)
+            : new PinLogic(Config.GetBitmapdescriptionFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
+            new TileLayerLogic(),
+            new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
+        };
 
     protected override void DisconnectHandler(MapView platformView)
     {

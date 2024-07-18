@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-
+using Maui.GoogleMaps.Clustering;
 using Maui.GoogleMaps.Extensions;
 using Maui.GoogleMaps.Helpers;
 using Maui.GoogleMaps.Internals;
 
 namespace Maui.GoogleMaps;
 
-public class Map : View, IMap, IEnumerable<Pin>
+public partial class Map : View, IMap, IEnumerable<Pin>
 {
     public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(Map), default(IEnumerable),
         propertyChanged: (b, o, n) => ((Map)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));
@@ -94,6 +94,7 @@ public class Map : View, IMap, IEnumerable<Pin>
     public Map()
     {
         VerticalOptions = HorizontalOptions = LayoutOptions.Fill;
+        ClusterOptions = new ClusterOptions();
     }
 
     public bool IsTrafficEnabled
