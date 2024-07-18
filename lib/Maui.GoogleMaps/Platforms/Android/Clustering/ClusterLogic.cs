@@ -71,6 +71,8 @@ internal class ClusterLogic : DefaultPinLogic<ClusteredMarker, GoogleMap>
             }
         };
 
+        clusterManager.Algorithm.MaxDistanceBetweenClusteredItems = Map.ClusterOptions.MaxDistanceBetweenClusteredItems;
+
         clusterListener = new ClusterLogicListener(Map, clusterManager, this);
 
         if (newNativeMap == null)

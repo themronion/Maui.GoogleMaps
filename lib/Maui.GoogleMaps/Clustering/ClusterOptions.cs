@@ -60,6 +60,11 @@ public class ClusterOptions
     /// </summary>
     internal int MinimumClusterSize { get; set; } = 1;
 
+    /// <summary>
+    /// Gets or sets the maximum distance between clustered items.
+    /// </summary>
+    internal int MaxDistanceBetweenClusteredItems { get; set; } = 100;
+
     public ClusterOptions()
     {
         Algorithm = ClusterAlgorithm.NonHierarchicalDistanceBased;
@@ -194,4 +199,14 @@ public class ClusterOptions
     {
         MinimumClusterSize = size;
     }
+
+    /// <summary>    
+    /// Sets the maximum distance between clustered items (Android only)
+    /// Default value is 100 (dp).
+    /// </summary>
+    /// <param name="distance"></param>
+    public void SetMaxDistanceBetweenClusteredItems(int distance)
+    {
+        MaxDistanceBetweenClusteredItems = distance;
+    }    
 }

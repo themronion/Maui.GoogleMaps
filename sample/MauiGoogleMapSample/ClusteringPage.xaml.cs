@@ -9,6 +9,11 @@ namespace MauiGoogleMapSample
             InitializeComponent();
 
             map.ClusterOptions.SetMinimumClusterSize(5);
+            map.ClusterOptions.SetMaxDistanceBetweenClusteredItems(100); // android only
+
+            //map.ClusterOptions.SetMinimumClusterSize(2);
+            //map.ClusterOptions.SetMaxDistanceBetweenClusteredItems(60); // android only
+
             map.ClusterClicked += Map_ClusterClicked;
 
             // New York pin
