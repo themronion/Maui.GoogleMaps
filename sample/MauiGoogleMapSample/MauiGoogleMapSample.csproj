@@ -105,7 +105,8 @@
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="ClusteringPage.cs">
+	  <Compile Update="ClusteringPage.xaml.cs">
+		<SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="PinsPage.xaml.cs">
@@ -129,11 +130,4 @@
 		<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="ClusteringPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
 </Project>
