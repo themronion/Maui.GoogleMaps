@@ -31,9 +31,12 @@ namespace Maui.GoogleMaps.Clustering.iOS
         public void SetUpdateMarker(ClusteredMarker clusteredMarker)
         {
             var marker = GetMarker(clusteredMarker);
-            if (marker == null) return;
-            marker.Position = new CLLocationCoordinate2D(clusteredMarker.Position.Latitude,
-                clusteredMarker.Position.Longitude);
+            if (marker == null)
+            {
+                return;
+            }
+
+            marker.Position = new CLLocationCoordinate2D(clusteredMarker.Position.Latitude, clusteredMarker.Position.Longitude);
             marker.Title = clusteredMarker.Title;
             marker.Snippet = clusteredMarker.Snippet;
             marker.Draggable = clusteredMarker.Draggable;
@@ -62,11 +65,13 @@ namespace Maui.GoogleMaps.Clustering.iOS
 
             marker.Position = initialPosition;
             marker.UserData = userData;
-
             marker.Map = nativeMap;
 
             if (animated)
+            {
                 AnimateMarker(position, marker);
+            }
+
             return marker;
         }
 
