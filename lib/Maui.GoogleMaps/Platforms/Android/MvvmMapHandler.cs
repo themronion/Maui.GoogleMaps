@@ -47,6 +47,11 @@ public class InfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
 
     public virtual global::Android.Views.View GetInfoContents(Marker marker)
     {
+        return null;
+    }
+
+    public virtual global::Android.Views.View GetInfoWindow(Marker marker)
+    {
         var pin = Map.Pins.FirstOrDefault(p => ((Marker)p.NativeObject).Id == marker.Id);
 
         var template = Map.InfoWindowTemplate;
@@ -62,16 +67,10 @@ public class InfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
 
         var platformView = view.ToPlatform(Map.Handler.MauiContext);
 
-        var request = view.Measure(this.Map.Width - 50, double.PositiveInfinity, MeasureFlags.IncludeMargins);
-        view.Layout(new Rect(0, 0, request.Request.Width, request.Request.Height));
+        var request = view.Measure(this.Map.Width - (int)platformView.Context.ToPixels(20), double.PositiveInfinity, MeasureFlags.IncludeMargins);
 
         platformView.LayoutParameters = new LayoutParams((int)platformView.Context.ToPixels(request.Request.Width), (int)platformView.Context.ToPixels(request.Request.Height));
 
         return platformView;
-    }
-
-    public virtual global::Android.Views.View GetInfoWindow(Marker marker)
-    {
-        return null;
     }
 }

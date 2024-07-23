@@ -9,10 +9,17 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<PackageId>Onion.Maui.GoogleMaps</PackageId>
 		<Title>Maui.GoogleMaps</Title>
-		<PackageVersion>5.1.1</PackageVersion>
+		<PackageVersion>5.1.2</PackageVersion>
 		<PackageReleaseNotes>
+# 5.1.2
+- Fixed android/ios obsolete code, small code cleanings
 # 5.1.1
 - Fixed min/max zoom level mapping for MvvmMapHandler
+# 5.1.0
+- Added MvvmMap control, which has a lot of useful bindings, has support for custom info window.
+- Added ability to allow different patterns on polylines (Android: dashed and dotted lines, iOS: dashed lines only at this point)
+- Fixed snapshots on iOS 17+
+- MAUI update
 		</PackageReleaseNotes>
 		<Authors>themronion</Authors>
 		<Copyright>Copyright 2022-2024</Copyright>

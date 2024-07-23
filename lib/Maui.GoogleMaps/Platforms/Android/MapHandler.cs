@@ -2,6 +2,7 @@
 using Android.Gms.Maps.Model;
 using Android.Graphics;
 using Android.OS;
+
 using Maui.GoogleMaps.Android;
 using Maui.GoogleMaps.Android.Callbacks;
 using Maui.GoogleMaps.Android.Extensions;
@@ -9,6 +10,7 @@ using Maui.GoogleMaps.Internals;
 using Maui.GoogleMaps.Logics;
 using Maui.GoogleMaps.Logics.Android;
 using Maui.GoogleMaps.Platforms.Android.Listeners;
+
 using Math = System.Math;
 
 namespace Maui.GoogleMaps.Handlers;
@@ -71,15 +73,15 @@ public partial class MapHandler
     {
         _cameraLogic = new CameraLogic(UpdateVisibleRegion);
 
-        Logics = new List<BaseLogic<GoogleMap>>
-        {
+        Logics =
+        [
             new PolylineLogic(),
             new PolygonLogic(),
             new CircleLogic(),
             new PinLogic(Config.GetBitmapdescriptionFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
             new TileLayerLogic(),
             new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
-        };
+        ];
 
         var activity = Platform.CurrentActivity;
 
@@ -229,7 +231,7 @@ public partial class MapHandler
         if (handler.NativeMap != null)
         {
             handler.NativeMap.TrafficEnabled = map.IsTrafficEnabled;
-        }    
+        }
     }
 
     public static void MapIsIndoorEnabled(MapHandler handler, Map map)
@@ -280,7 +282,7 @@ public partial class MapHandler
 
             _uiSettingsLogic.Unregister();
 
-           Map.OnSnapshot -= OnSnapshot;
+            Map.OnSnapshot -= OnSnapshot;
             _cameraLogic.Unregister();
 
             foreach (var logic in Logics)

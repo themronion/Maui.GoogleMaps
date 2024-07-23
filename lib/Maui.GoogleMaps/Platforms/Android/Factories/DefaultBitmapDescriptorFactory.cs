@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
+
 using Android.Graphics;
-using Android.Widget;
+
 using AndroidBitmapDescriptor = Android.Gms.Maps.Model.BitmapDescriptor;
 using AndroidBitmapDescriptorFactory = Android.Gms.Maps.Model.BitmapDescriptorFactory;
 
@@ -18,7 +19,7 @@ public sealed class DefaultBitmapDescriptorFactory : IBitmapDescriptorFactory
     private DefaultBitmapDescriptorFactory()
     {
     }
-    
+
     public AndroidBitmapDescriptor ToNative(BitmapDescriptor bitmapDescriptor, IMauiContext mauiContext)
     {
         if (bitmapDescriptor.Id != null && _cacheDictionary.TryGetValue(bitmapDescriptor.Id, out var cachedBitmap))
@@ -61,8 +62,7 @@ public sealed class DefaultBitmapDescriptorFactory : IBitmapDescriptorFactory
 
             case BitmapDescriptorType.View:
                 var iconView = bitmapDescriptor.View.Invoke();
-                var nativeView = Utils.ConvertMauiToNative(iconView, mauiContext);
-                var androidBitmapDescriptor = Utils.ConvertViewToBitmapDescriptor(nativeView);
+                var androidBitmapDescriptor = Utils.ConvertMauiViewToBitmapDescriptor(iconView, mauiContext);
                 return androidBitmapDescriptor;
 
             default:

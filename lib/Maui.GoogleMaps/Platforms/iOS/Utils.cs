@@ -15,13 +15,13 @@ internal static class Utils
         return view.ToPlatform(mauiContext);
     }
 
-    public static UIImage ConvertViewToImage(UIView view)
+    public static UIImage ConvertMauiViewToImage(View view, IMauiContext mauiContext)
     {
-        UIGraphics.BeginImageContextWithOptions(view.Bounds.Size, false, 0);
-        view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
-        UIImage img = UIGraphics.GetImageFromCurrentImageContext();
-        UIGraphics.EndImageContext();
+        var nativeView = ConvertMauiToNative(view, mauiContext);
 
-        return img;
+        return new UIGraphicsImageRenderer(nativeView.Bounds.Size).CreateImage(ctx =>
+        {
+            nativeView.Layer.RenderInContext(ctx.CGContext);
+        });
     }
 }
