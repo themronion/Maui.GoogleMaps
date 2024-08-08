@@ -7,14 +7,14 @@ using NativePolygon = Android.Gms.Maps.Model.Polygon;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
+public class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
 {
     protected override IList<Polygon> GetItems(Map map)
     {
         return map.Polygons;
     }
 
-    internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -24,7 +24,7 @@ internal class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
         }
     }
 
-    internal override void Unregister(GoogleMap nativeMap, Map map)
+    public override void Unregister(GoogleMap nativeMap, Map map)
     {
         if (nativeMap != null)
         {

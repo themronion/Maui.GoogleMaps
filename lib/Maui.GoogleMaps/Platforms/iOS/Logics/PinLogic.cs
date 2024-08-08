@@ -5,7 +5,7 @@ using Maui.GoogleMaps.iOS.Factories;
 
 namespace Maui.GoogleMaps.Logics.iOS;
 
-internal class PinLogic : DefaultPinLogic<Marker, MapView>
+public class PinLogic : DefaultPinLogic<Marker, MapView>
 {
     private bool _onMarkerEvent;
     private Pin _draggingPin;
@@ -31,7 +31,7 @@ internal class PinLogic : DefaultPinLogic<Marker, MapView>
         _onMarkerDeleted = onMarkerDeleted;
     }
 
-    internal override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -47,7 +47,7 @@ internal class PinLogic : DefaultPinLogic<Marker, MapView>
         }
     }
 
-    internal override void Unregister(MapView nativeMap, Map map)
+    public override void Unregister(MapView nativeMap, Map map)
     {
         if (nativeMap != null)
         {
@@ -110,7 +110,7 @@ internal class PinLogic : DefaultPinLogic<Marker, MapView>
         return nativeMarker;
     }
 
-    internal override void OnMapPropertyChanged(string propertyName)
+    public override void OnMapPropertyChanged(string propertyName)
     {
         if (propertyName == Map.SelectedPinProperty.PropertyName)
         {

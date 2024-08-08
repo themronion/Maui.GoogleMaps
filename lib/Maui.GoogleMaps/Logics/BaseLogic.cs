@@ -14,7 +14,7 @@ public abstract class BaseLogic<TNativeMap>
 
     protected abstract INotifyCollectionChanged GetItemAsNotifyCollectionChanged(Map map);
 
-    internal virtual void Register(TNativeMap oldNativeMap, Map oldMap, TNativeMap newNativeMap, Map newMap, IElementHandler handler)
+    public virtual void Register(TNativeMap oldNativeMap, Map oldMap, TNativeMap newNativeMap, Map newMap, IElementHandler handler)
     {
         this.NativeMap = newNativeMap;
         this.Map = newMap;
@@ -32,7 +32,7 @@ public abstract class BaseLogic<TNativeMap>
         }
     }
 
-    internal virtual void Unregister(TNativeMap nativeMap, Map map)
+    public virtual void Unregister(TNativeMap nativeMap, Map map)
     {
         if (map != null)
         {
@@ -86,7 +86,7 @@ public abstract class BaseLogic<TNativeMap>
 
     internal abstract void RestoreItems();
 
-    internal virtual void OnMapPropertyChanged(string propertyName)
+    public virtual void OnMapPropertyChanged(string propertyName)
     {
     }
 }

@@ -68,6 +68,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\lib\Maui.GoogleMaps\Maui.GoogleMaps.csproj" />
+	  <ProjectReference Include="..\..\Maui.GoogleMaps.Clustering\Maui.GoogleMaps.Clustering.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -125,6 +126,12 @@
 		<SubType>Code</SubType>
 		<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="ClusteringPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

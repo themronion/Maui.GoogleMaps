@@ -17,7 +17,7 @@ internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverla
         _bitmapDescriptorFactory = bitmapDescriptorFactory;
     }
 
-    internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -27,7 +27,7 @@ internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverla
         }
     }
 
-    internal override void Unregister(GoogleMap nativeMap, Map map)
+    public override void Unregister(GoogleMap nativeMap, Map map)
     {
         if (nativeMap != null)
         {

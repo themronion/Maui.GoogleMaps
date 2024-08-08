@@ -32,7 +32,7 @@ internal class PinLogic : DefaultPinLogic<Marker, GoogleMap>
         _onMarkerDeleted = onMarkerDeleted;
     }
 
-    internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -48,7 +48,7 @@ internal class PinLogic : DefaultPinLogic<Marker, GoogleMap>
         }
     }
 
-    internal override void Unregister(GoogleMap nativeMap, Map map)
+    public override void Unregister(GoogleMap nativeMap, Map map)
     {
         if (nativeMap != null)
         {
@@ -232,7 +232,7 @@ internal class PinLogic : DefaultPinLogic<Marker, GoogleMap>
         _withoutUpdateNative = false;
     }
 
-    internal override void OnMapPropertyChanged(string propertyName)
+    public override void OnMapPropertyChanged(string propertyName)
     {
         if (propertyName == Map.SelectedPinProperty.PropertyName)
         {
