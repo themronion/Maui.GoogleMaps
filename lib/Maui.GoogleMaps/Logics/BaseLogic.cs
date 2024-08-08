@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 
 namespace Maui.GoogleMaps.Logics;
 
-internal abstract class BaseLogic<TNativeMap>
+public abstract class BaseLogic<TNativeMap>
 {
     public float ScaledDensity { get; internal set; }
 
