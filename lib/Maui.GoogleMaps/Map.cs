@@ -9,7 +9,7 @@ using Maui.GoogleMaps.Internals;
 
 namespace Maui.GoogleMaps;
 
-public class Map : View, IMap, IEnumerable<Pin>
+public partial class Map : View, IMap, IEnumerable<Pin>
 {
     public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(Map), default(IEnumerable),
         propertyChanged: (b, o, n) => ((Map)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));

@@ -6,7 +6,6 @@ using Android.Gms.Maps.Model;
 using Android.Gms.Maps.Utils.Clustering;
 using Android.Gms.Maps.Utils.Clustering.Algorithm;
 using Android.Widget;
-
 using Maui.GoogleMaps.Android;
 using Maui.GoogleMaps.Android.Extensions;
 using Maui.GoogleMaps.Android.Factories;
@@ -15,7 +14,7 @@ using Maui.GoogleMaps.Logics;
 
 namespace Maui.GoogleMaps.Clustering.Platforms.Android
 {
-    internal class ClusterLogic : DefaultPinLogic<ClusteredMarker, GoogleMap>
+    public class ClusterLogic : DefaultPinLogic<ClusteredMarker, GoogleMap>
     {
         protected override IList<Pin> GetItems(Map map) => Map.Pins;
         public ClusteredMap ClusteredMapp => (ClusteredMap)Map;

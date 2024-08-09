@@ -25,7 +25,7 @@ public partial class MapHandler : ViewHandler<Map, MapView>
 #endif
     };
 
-    public MapHandler(global::Android.Content.Context context) : this(MapMapper)
+    public MapHandler() : this(MapMapper)
     {
     }
 

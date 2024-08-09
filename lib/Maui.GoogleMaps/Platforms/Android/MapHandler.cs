@@ -107,7 +107,8 @@ public partial class MapHandler
 
         base.ConnectHandler(platformView);
     }
-
+    public virtual void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>();
+       
     protected override void DisconnectHandler(MapView platformView)
     {
         if (!_disposed)
