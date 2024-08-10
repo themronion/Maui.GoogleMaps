@@ -11,6 +11,7 @@ namespace MauiGoogleMapSample
             buttonCamera.Clicked += (_, e) => Navigation.PushAsync(new CameraPage());
             buttonPins.Clicked += (_, e) => Navigation.PushAsync(new PinsPage());
             buttonShapes.Clicked += (_, e) => Navigation.PushAsync(new ShapesPage());
+            buttonClustering.Clicked += (_, e) => Navigation.PushAsync(new ClusteringPage());
             buttonShapes2.Clicked += (_, e) => Navigation.PushAsync(new Shapes2Page());
             buttonTiles.Clicked += (_, e) => Navigation.PushAsync(new TilesPage());
             buttonCustomPins.Clicked += (_, e) => Navigation.PushAsync(new CustomPinsPage());

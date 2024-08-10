@@ -7,11 +7,11 @@ using NativePatternItem = Android.Gms.Maps.Model.PatternItem;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
+public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
 {
     protected override IList<Polyline> GetItems(Map map) => map.Polylines;
 
-    internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -21,7 +21,7 @@ internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
         }
     }
 
-    internal override void Unregister(GoogleMap nativeMap, Map map)
+    public override void Unregister(GoogleMap nativeMap, Map map)
     {
         if (nativeMap != null)
         {

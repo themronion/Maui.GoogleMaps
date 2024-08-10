@@ -5,7 +5,7 @@ using Maui.GoogleMaps.iOS.Factories;
 
 namespace Maui.GoogleMaps.Logics.iOS;
 
-internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, MapView>
+public class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, MapView>
 {
     private readonly IImageFactory _imageFactory;
 
@@ -14,7 +14,7 @@ internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverla
         _imageFactory = imageFactory;
     }
 
-    internal override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -24,7 +24,7 @@ internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverla
         }
     }
 
-    internal override void Unregister(MapView nativeMap, Map map)
+    public override void Unregister(MapView nativeMap, Map map)
     {
         if (nativeMap != null)
         {

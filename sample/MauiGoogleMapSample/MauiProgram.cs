@@ -1,4 +1,5 @@
-﻿using Maui.GoogleMaps.Hosting;
+﻿using Maui.GoogleMaps.Clustering.Hosting;
+using Maui.GoogleMaps.Hosting;
 
 namespace MauiGoogleMapSample
 {
@@ -21,6 +22,7 @@ namespace MauiGoogleMapSample
             };
 
             builder.UseGoogleMaps(platformConfig);
+            builder.UseGoogleMapsClustering();
 #elif IOS
             var platformConfig = new Maui.GoogleMaps.iOS.PlatformConfig
             {

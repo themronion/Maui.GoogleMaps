@@ -6,7 +6,7 @@ using Maui.GoogleMaps.Android.Layers;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class TileLayerLogic : DefaultLogic<TileLayer, NativeTileOverlay, GoogleMap>
+public class TileLayerLogic : DefaultLogic<TileLayer, NativeTileOverlay, GoogleMap>
 {
     protected override IList<TileLayer> GetItems(Map map) => map.TileLayers;
 
