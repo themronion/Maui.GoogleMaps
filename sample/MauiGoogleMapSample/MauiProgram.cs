@@ -30,6 +30,7 @@ namespace MauiGoogleMapSample
             };
 
             builder.UseGoogleMaps(Variables.GOOGLE_MAPS_IOS_API_KEY, platformConfig);
+            builder.UseGoogleMapsClustering();
 #endif
             return builder.Build();
         }

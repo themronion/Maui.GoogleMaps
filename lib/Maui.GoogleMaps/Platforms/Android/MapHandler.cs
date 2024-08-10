@@ -73,8 +73,8 @@ public partial class MapHandler
     {
         _cameraLogic = new CameraLogic(UpdateVisibleRegion);
         InitLogics();
-        if(Logics == null)
-        Logics =
+        if (Logics == null || !Logics.Any())
+            Logics =
         [
             new PolylineLogic(),
             new PolygonLogic(),

@@ -13,7 +13,7 @@ namespace Maui.GoogleMaps.Clustering.Hosting
     {
         public static MauiAppBuilder UseGoogleMapsClustering(this MauiAppBuilder appBuilder)
         {
-#if ANDROID            
+#if ANDROID || IOS
             appBuilder
                 .ConfigureMauiHandlers(handlers =>
                     handlers.AddHandler<ClusteredMap, ClusterMapHandler>()

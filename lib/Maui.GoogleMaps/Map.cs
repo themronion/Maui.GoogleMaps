@@ -315,7 +315,7 @@ public partial class Map : View, IMap, IEnumerable<Pin>
         InfoWindowClicked?.Invoke(this, args);
     }
 
-    internal void SendInfoWindowLongClicked(Pin pin)
+    public void SendInfoWindowLongClicked(Pin pin)
     {
         var args = new InfoWindowLongClickedEventArgs(pin);
         InfoWindowLongClicked?.Invoke(this, args);

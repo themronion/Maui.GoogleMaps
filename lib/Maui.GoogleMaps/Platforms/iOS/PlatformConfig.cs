@@ -6,7 +6,7 @@ public sealed class PlatformConfig
 {
     public IImageFactory ImageFactory { get; set; }
 
-    internal IImageFactory GetImageFactory()
+    public IImageFactory GetImageFactory()
     {
         return ImageFactory ?? DefaultImageFactory.Instance;
     }
