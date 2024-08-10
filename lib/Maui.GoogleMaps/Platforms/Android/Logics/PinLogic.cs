@@ -6,7 +6,7 @@ using Maui.GoogleMaps.Android.Factories;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class PinLogic : DefaultPinLogic<Marker, GoogleMap>
+public class PinLogic : DefaultPinLogic<Marker, GoogleMap>
 {
     private volatile bool _onMarkerEvent = false;
     private Pin _draggingPin;

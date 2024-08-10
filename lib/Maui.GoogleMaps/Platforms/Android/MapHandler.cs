@@ -26,7 +26,7 @@ public partial class MapHandler
 
     internal float ScaledDensity;
 
-    internal IList<BaseLogic<GoogleMap>> Logics;
+    public IList<BaseLogic<GoogleMap>> Logics;
 
     static Bundle s_bundle;
     internal static Bundle Bundle { set { s_bundle = value; } }
@@ -72,7 +72,8 @@ public partial class MapHandler
     protected override async void ConnectHandler(MapView platformView)
     {
         _cameraLogic = new CameraLogic(UpdateVisibleRegion);
-
+        InitLogics();
+        if(Logics == null)
         Logics =
         [
             new PolylineLogic(),
@@ -82,7 +83,7 @@ public partial class MapHandler
             new TileLayerLogic(),
             new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
         ];
-
+        
         var activity = Platform.CurrentActivity;
 
         if (activity != null)
@@ -104,11 +105,11 @@ public partial class MapHandler
         }
 
         OnMapReady();
-
+        
         base.ConnectHandler(platformView);
     }
     public virtual void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>();
-       
+
     protected override void DisconnectHandler(MapView platformView)
     {
         if (!_disposed)
@@ -313,7 +314,7 @@ public partial class MapHandler
     /// </summary>
     /// <param name="outerItem">the pin.</param>
     /// <param name="innerItem">the marker options.</param>
-    protected virtual void OnMarkerCreating(Pin outerItem, MarkerOptions innerItem)
+    public virtual void OnMarkerCreating(Pin outerItem, MarkerOptions innerItem)
     {
     }
 
@@ -333,7 +334,7 @@ public partial class MapHandler
     /// </summary>
     /// <param name="outerItem">the pin.</param>
     /// <param name="innerItem">thr marker.</param>
-    protected virtual void OnMarkerDeleting(Pin outerItem, Marker innerItem)
+    public virtual void OnMarkerDeleting(Pin outerItem, Marker innerItem)
     {
     }
 

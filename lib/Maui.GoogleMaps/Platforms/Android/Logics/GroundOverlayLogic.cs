@@ -6,7 +6,7 @@ using Maui.GoogleMaps.Android.Factories;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, GoogleMap>
+public class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, GoogleMap>
 {
     protected override IList<GroundOverlay> GetItems(Map map) => map.GroundOverlays;
 
