@@ -1,4 +1,8 @@
-﻿using Android.Gms.Maps.Model;
+﻿// Original code from https://github.com/mierzynskim/Xamarin.Forms.GoogleMaps.Clustering/
+// Original author code from https://github.com/sferhah
+
+
+using Android.Gms.Maps.Model;
 using Android.Gms.Maps.Utils.Clustering;
 using Java.Lang;
 using NativeBitmapDescriptor = Android.Gms.Maps.Model.BitmapDescriptor;

@@ -44,7 +44,6 @@ namespace Maui.GoogleMaps.Clustering
                 PendingClusterRequest = true;
             }
         }
-
         internal void SendClusterClicked(int itemsCount, IEnumerable<Pin> pins, Position position)
             => ClusterClicked?.Invoke(this, new ClusterClickedEventArgs(itemsCount, pins, position));
     }

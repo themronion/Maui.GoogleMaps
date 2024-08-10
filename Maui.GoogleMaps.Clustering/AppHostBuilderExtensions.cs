@@ -16,9 +16,7 @@ namespace Maui.GoogleMaps.Clustering.Hosting
 #if ANDROID            
             appBuilder
                 .ConfigureMauiHandlers(handlers =>
-
                     handlers.AddHandler<ClusteredMap, ClusterMapHandler>()
-
                 );
 #endif
             return appBuilder;

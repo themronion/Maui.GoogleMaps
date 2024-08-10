@@ -1,4 +1,7 @@
-﻿using Android.Gms.Maps.Utils.Clustering;
+﻿// Original code from https://github.com/mierzynskim/Xamarin.Forms.GoogleMaps.Clustering/
+// Original author code from https://github.com/sferhah
+//
+using Android.Gms.Maps.Utils.Clustering;
 using System;
 using System.Collections.Generic;
 using System.Linq;

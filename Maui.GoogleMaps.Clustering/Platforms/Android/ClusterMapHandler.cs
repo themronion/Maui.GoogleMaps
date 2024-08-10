@@ -1,4 +1,6 @@
-﻿
+﻿// Original code from https://github.com/mierzynskim/Xamarin.Forms.GoogleMaps.Clustering/
+// Original author code from https://github.com/sferhah
+
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Maui.GoogleMaps.Clustering.Platforms.Android;
@@ -15,7 +17,6 @@ namespace Maui.GoogleMaps.Clustering
 {
     public partial class ClusterMapHandler
     {
-
         /// <summary>
         /// Call when before marker create.
         /// You can override your custom renderer for customize marker.
@@ -26,7 +27,6 @@ namespace Maui.GoogleMaps.Clustering
         {
 
         }
-
         /// <summary>
         /// Call when after marker create.
         /// You can override your custom renderer for customize marker.
@@ -46,9 +46,6 @@ namespace Maui.GoogleMaps.Clustering
         protected virtual void OnClusteredMarkerDeleting(Pin outerItem, ClusteredMarker innerItem)
         {
         }
-        protected virtual void CreateNativeItem(Pin outerItem)
-        {
-        }
         /// <summary>
         /// Call when after marker delete.
         /// You can override your custom renderer for customize marker.
@@ -62,39 +59,18 @@ namespace Maui.GoogleMaps.Clustering
         protected override void OnMapReady()
         {
             base.OnMapReady();
-
-            var cluster =  VirtualView as ClusteredMap;
-
+            var cluster = VirtualView as ClusteredMap;
         }
-   
+
     }
     public partial class ClusterMapHandler : MapHandler
     {
-   
 
         public ClusterMapHandler()
         {
-            
+
         }
-        //protected override void OnMarkerCreated(Pin outerItem, Marker innerItem)
-        //{
-        //    base.OnMarkerCreated(outerItem, innerItem);
-        //}
-        //protected override void OnMarkerCreating(Pin outerItem, MarkerOptions innerItem)
-        //{
-        //    base.OnMarkerCreating(outerItem, innerItem);
-        //}
-        //public override void InitLogics() //=> Logics = new List<BaseLogic<GoogleMap>>
-        //{
-        //    Logics = = new List<BaseLogic<GoogleMap>> { 
-        //    new PolylineLogic();
-        //    new PolygonLogic();
-        //    new CircleLogic();
-        //    new ClusterLogic(this.Context, Config.GetBitmapdescriptionFactory(), OnClusteredMarkerCreating, OnClusteredMarkerCreated, OnClusteredMarkerDeleting, OnClusteredMarkerDeleted);
-        //    new TileLayerLogic();
-        //    new GroundOverlayLogic(Config.GetBitmapdescriptionFactory());
-        //}
-          public override void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>
+        public override void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>
         {
             new PolylineLogic(),
             new PolygonLogic(),
@@ -103,28 +79,5 @@ namespace Maui.GoogleMaps.Clustering
             new TileLayerLogic(),
             new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
         };
-        //        public override void InitLogics()
-        //        {
-        //            //Map.ClusterOptions.MinimumClusterSize > 1 
-        //            new ClusterLogic(this.Context, Config.GetBitmapdescriptionFactory(), OnClusteredMarkerCreating, OnClusteredMarkerCreated, OnClusteredMarkerDeleting, OnClusteredMarkerDeleted);
-        //#if ANDROID
-        //            //new GoogleMaps.Logics.Android.PinLogic(Config.GetBitmapdescriptionFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted);
-
-        //#endif
-        //            base.InitLogics();
-        //        }
-
-        //public override void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>
-        //{
-        //    new PolylineLogic(),
-        //    new PolygonLogic(),
-        //    new CircleLogic(),
-        //    Map.ClusterOptions.MinimumClusterSize > 1
-        //    ? new ClusterLogic(this.Context, Config.GetBitmapdescriptionFactory(), OnClusteredMarkerCreating, OnClusteredMarkerCreated, OnClusteredMarkerDeleting, OnClusteredMarkerDeleted)
-        //    : new PinLogic(Config.GetBitmapdescriptionFactory(), OnMarkerCreating, OnMarkerCreated, OnMarkerDeleting, OnMarkerDeleted),
-        //    new TileLayerLogic(),
-        //    new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
-        //};
-
     }
 }

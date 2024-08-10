@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿// Original code from https://github.com/mierzynskim/Xamarin.Forms.GoogleMaps.Clustering/
+// Original author code from https://github.com/sferhah
+
+using System.Collections;
 using System.ComponentModel;
 using Android.Content;
 using Android.Gms.Maps;

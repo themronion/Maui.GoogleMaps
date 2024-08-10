@@ -1,4 +1,6 @@
-﻿using Android.Content;
+﻿// Original code from https://github.com/mierzynskim/Xamarin.Forms.GoogleMaps.Clustering/
+// Original author code from https://github.com/sferhah
+using Android.Content;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Gms.Maps.Utils.Clustering;
@@ -11,7 +13,6 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
 {
     public class ClusterRenderer : DefaultClusterRenderer
     {
-        //private readonly Map map;
         public ClusteredMap map;
         protected IMauiContext mauiContext;
         private readonly Dictionary<string, NativeBitmapDescriptor> disabledBucketsCache = [];
