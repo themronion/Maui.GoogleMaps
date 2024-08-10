@@ -9,6 +9,10 @@
 	  <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 	  <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MapHandler.Clustering.cs" />
+  </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
 	</ItemGroup>
@@ -20,6 +24,9 @@
 	</ItemGroup>
   <ItemGroup>
     <Folder Include="Platforms\iOS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MapHandler.Clustering.cs" />
   </ItemGroup>
 
   <ItemGroup>

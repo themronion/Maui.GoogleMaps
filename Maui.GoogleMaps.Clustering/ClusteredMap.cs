@@ -19,13 +19,15 @@ namespace Maui.GoogleMaps.Clustering
         internal Action OnCluster { get; set; }
 
         internal bool PendingClusterRequest { get; set; }
-
         public ClusterOptions ClusterOptions
         {
             get => (ClusterOptions)GetValue(ClusterOptionsProperty);
             set => SetValue(ClusterOptionsProperty, value);
         }
-
+        public ClusteredMap()
+        {
+            ClusterOptions = new ClusterOptions();
+        }
         public void Cluster()
         {
             SendCluster();

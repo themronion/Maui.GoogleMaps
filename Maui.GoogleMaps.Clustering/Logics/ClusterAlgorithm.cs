@@ -84,6 +84,7 @@ namespace Maui.GoogleMaps.Clustering.Logics
         /// Gets or sets the minimum cluster size.
         /// </summary>
         internal int MinimumClusterSize { get; set; } = 5;
+        internal int MaxDistanceBetweenClusteredItems { get; set; } = 100;
 
         public ClusterOptions()
         {
@@ -218,6 +219,15 @@ namespace Maui.GoogleMaps.Clustering.Logics
         public void SetMinimumClusterSize(int size)
         {
             MinimumClusterSize = size;
+        }
+        /// <summary>    
+        /// Sets the maximum distance between clustered items (Android only)
+        /// Default value is 100 (dp).
+        /// </summary>
+        /// <param name="distance"></param>
+        public void SetMaxDistanceBetweenClusteredItems(int distance)
+        {
+            MaxDistanceBetweenClusteredItems = distance;
         }
     }
 }

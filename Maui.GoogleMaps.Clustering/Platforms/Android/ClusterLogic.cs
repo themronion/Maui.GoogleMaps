@@ -59,6 +59,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
 
             clusterManager = new ClusterManager(context, NativeMap)
             {
+
                 Algorithm = ClusteredMapp.ClusterOptions.Algorithm switch
                 {
                     ClusterAlgorithm.GridBased => new GridBasedAlgorithm(),
@@ -68,6 +69,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
                     _ => new NonHierarchicalDistanceBasedAlgorithm(),
                 }
             };
+            clusterManager.Algorithm.MaxDistanceBetweenClusteredItems = ClusteredMapp.ClusterOptions.MaxDistanceBetweenClusteredItems;
 
             clusterListener = new ClusterLogicListener(ClusteredMapp, clusterManager, this);
 
