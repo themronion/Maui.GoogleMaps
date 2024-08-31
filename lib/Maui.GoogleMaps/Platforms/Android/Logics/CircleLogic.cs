@@ -6,9 +6,9 @@ using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class CircleLogic : DefaultCircleLogic<NativeCircle, GoogleMap>
+public class CircleLogic : DefaultCircleLogic<NativeCircle, GoogleMap>
 {
-    internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -18,7 +18,7 @@ internal class CircleLogic : DefaultCircleLogic<NativeCircle, GoogleMap>
         }
     }
 
-    internal override void Unregister(GoogleMap nativeMap, Map map)
+    public override void Unregister(GoogleMap nativeMap, Map map)
     {
         if (nativeMap != null)
         {

@@ -6,7 +6,7 @@ using Maui.GoogleMaps.Android.Factories;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
-internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, GoogleMap>
+public class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, GoogleMap>
 {
     protected override IList<GroundOverlay> GetItems(Map map) => map.GroundOverlays;
 
@@ -17,7 +17,7 @@ internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverla
         _bitmapDescriptorFactory = bitmapDescriptorFactory;
     }
 
-    internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -27,7 +27,7 @@ internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverla
         }
     }
 
-    internal override void Unregister(GoogleMap nativeMap, Map map)
+    public override void Unregister(GoogleMap nativeMap, Map map)
     {
         if (nativeMap != null)
         {

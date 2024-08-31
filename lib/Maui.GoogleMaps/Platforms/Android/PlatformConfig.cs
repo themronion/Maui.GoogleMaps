@@ -6,7 +6,7 @@ public sealed class PlatformConfig
 {
     public IBitmapDescriptorFactory BitmapDescriptorFactory { get; set; }
 
-    internal IBitmapDescriptorFactory GetBitmapdescriptionFactory()
+    public IBitmapDescriptorFactory GetBitmapdescriptionFactory()
     {
         return BitmapDescriptorFactory ?? DefaultBitmapDescriptorFactory.Instance;
     }

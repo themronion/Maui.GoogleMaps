@@ -3,7 +3,7 @@ using Microsoft.Maui.Platform;
 
 namespace Maui.GoogleMaps;
 
-internal static class Utils
+public static class Utils
 {
     public static UIView ConvertMauiToNative(View view, IElementHandler elementHandler)
     {
@@ -23,5 +23,14 @@ internal static class Utils
         {
             nativeView.Layer.RenderInContext(ctx.CGContext);
         });
+    }
+    public static UIImage ConvertViewToImage(UIView view)
+    {
+        UIGraphics.BeginImageContextWithOptions(view.Bounds.Size, false, 0);
+        view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
+        UIImage img = UIGraphics.GetImageFromCurrentImageContext();
+        UIGraphics.EndImageContext();
+
+        return img;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Maui.GoogleMaps.iOS.Extensions;
 
-internal static class PositionExtensions
+public static class PositionExtensions
 {
     public static CLLocationCoordinate2D ToCoord(this Position self)
     {

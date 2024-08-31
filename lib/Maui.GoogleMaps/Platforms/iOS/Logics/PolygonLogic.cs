@@ -5,9 +5,9 @@ using NativePolygon = Google.Maps.Polygon;
 
 namespace Maui.GoogleMaps.Logics.iOS;
 
-internal class PolygonLogic : DefaultPolygonLogic<NativePolygon, MapView>
+public class PolygonLogic : DefaultPolygonLogic<NativePolygon, MapView>
 {
-    internal override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
+    public override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap, IElementHandler handler)
     {
         base.Register(oldNativeMap, oldMap, newNativeMap, newMap, handler);
 
@@ -17,7 +17,7 @@ internal class PolygonLogic : DefaultPolygonLogic<NativePolygon, MapView>
         }
     }
 
-    internal override void Unregister(MapView nativeMap, Map map)
+    public override void Unregister(MapView nativeMap, Map map)
     {
         if (nativeMap != null)
         {

@@ -2,7 +2,7 @@
 
 namespace Maui.GoogleMaps.Logics;
 
-internal abstract class DefaultGroundOverlayLogic<TNative, TNativeMap> : DefaultLogic<GroundOverlay, TNative, TNativeMap>
+public abstract class DefaultGroundOverlayLogic<TNative, TNativeMap> : DefaultLogic<GroundOverlay, TNative, TNativeMap>
     where TNative : class
     where TNativeMap : class
 {

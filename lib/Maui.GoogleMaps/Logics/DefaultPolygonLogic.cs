@@ -2,7 +2,7 @@
 
 namespace Maui.GoogleMaps.Logics;
 
-internal abstract class DefaultPolygonLogic<TNative, TNativeMap> : DefaultLogic<Polygon, TNative, TNativeMap>
+public abstract class DefaultPolygonLogic<TNative, TNativeMap> : DefaultLogic<Polygon, TNative, TNativeMap>
     where TNative : class
     where TNativeMap : class
 {

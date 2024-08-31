@@ -9,7 +9,7 @@ using Maui.GoogleMaps.Internals;
 
 namespace Maui.GoogleMaps;
 
-public class Map : View, IMap, IEnumerable<Pin>
+public partial class Map : View, IMap, IEnumerable<Pin>
 {
     public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(Map), default(IEnumerable),
         propertyChanged: (b, o, n) => ((Map)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));
@@ -291,7 +291,7 @@ public class Map : View, IMap, IEnumerable<Pin>
         return comp.Task;
     }
 
-    internal void SendSelectedPinChanged(Pin selectedPin)
+    public void SendSelectedPinChanged(Pin selectedPin)
     {
         SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(selectedPin));
     }
@@ -302,36 +302,36 @@ public class Map : View, IMap, IEnumerable<Pin>
         CreatePinItems();
     }
 
-    internal bool SendPinClicked(Pin pin)
+    public bool SendPinClicked(Pin pin)
     {
         var args = new PinClickedEventArgs(pin);
         PinClicked?.Invoke(this, args);
         return args.Handled;
     }
 
-    internal void SendInfoWindowClicked(Pin pin)
+    public void SendInfoWindowClicked(Pin pin)
     {
         var args = new InfoWindowClickedEventArgs(pin);
         InfoWindowClicked?.Invoke(this, args);
     }
 
-    internal void SendInfoWindowLongClicked(Pin pin)
+    public void SendInfoWindowLongClicked(Pin pin)
     {
         var args = new InfoWindowLongClickedEventArgs(pin);
         InfoWindowLongClicked?.Invoke(this, args);
     }
 
-    internal void SendPinDragStart(Pin pin)
+    public void SendPinDragStart(Pin pin)
     {
         PinDragStart?.Invoke(this, new PinDragEventArgs(pin));
     }
 
-    internal void SendPinDragEnd(Pin pin)
+    public void SendPinDragEnd(Pin pin)
     {
         PinDragEnd?.Invoke(this, new PinDragEventArgs(pin));
     }
 
-    internal void SendPinDragging(Pin pin)
+    public void SendPinDragging(Pin pin)
     {
         PinDragging?.Invoke(this, new PinDragEventArgs(pin));
     }

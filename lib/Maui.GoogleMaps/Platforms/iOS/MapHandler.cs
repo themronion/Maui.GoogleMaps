@@ -28,7 +28,7 @@ namespace Maui.GoogleMaps.Handlers
 
         private bool _ready;
 
-        internal IList<BaseLogic<MapView>> Logics { get; set; }
+        public IList<BaseLogic<MapView>> Logics { get; set; }
 
         protected override MapView CreatePlatformView()
         {
@@ -49,6 +49,8 @@ namespace Maui.GoogleMaps.Handlers
 
         protected override void ConnectHandler(MapView platformView)
         {
+            InitLogics();
+            if (Logics == null || !Logics.Any())
             Logics =
             [
                 new PolylineLogic(),
@@ -88,6 +90,7 @@ namespace Maui.GoogleMaps.Handlers
 
             base.ConnectHandler(platformView);
         }
+        public virtual void InitLogics() { }
 
         protected override void DisconnectHandler(MapView platformView)
         {
