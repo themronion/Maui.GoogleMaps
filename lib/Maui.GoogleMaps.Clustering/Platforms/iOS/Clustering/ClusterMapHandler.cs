@@ -1,12 +1,6 @@
 ﻿using Maui.GoogleMaps.Clustering.Platforms.iOS.Clustering;
 using Maui.GoogleMaps.Handlers;
-using Maui.GoogleMaps.Logics;
 using Maui.GoogleMaps.Logics.iOS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maui.GoogleMaps.Clustering
 {   

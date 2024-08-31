@@ -7,11 +7,6 @@ using Maui.GoogleMaps.Clustering.Platforms.Android;
 using Maui.GoogleMaps.Handlers;
 using Maui.GoogleMaps.Logics;
 using Maui.GoogleMaps.Logics.Android;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maui.GoogleMaps.Clustering
 {

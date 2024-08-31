@@ -1,6 +1,6 @@
 ## ![Logo](https://raw.githubusercontent.com/themronion/Maui.GoogleMaps/maui/lib/Maui.GoogleMaps/logo.png) Maui.GoogleMaps 
 
-![NuGet](https://img.shields.io/nuget/v/Onion.Maui.GoogleMaps.svg?label=NuGet) ![](https://img.shields.io/nuget/dt/Onion.Maui.GoogleMaps.svg)
+[![NuGet](https://img.shields.io/nuget/v/Onion.Maui.GoogleMaps.svg?label=NuGet)](https://www.nuget.org/packages/Onion.Maui.GoogleMaps/) ![](https://img.shields.io/nuget/dt/Onion.Maui.GoogleMaps.svg)
 
 Maps library for MAUI that uses Google maps on both mobile platforms - Android and iOS.
 
@@ -56,7 +56,11 @@ public static MauiApp CreateMauiApp()
 }
 ```
 
-Sample application is here.
+If you need clustering, install [![NuGet](https://img.shields.io/nuget/v/Onion.Maui.GoogleMaps.svg?label=Onion.Maui.GoogleMaps.Clustering)](https://www.nuget.org/packages/Onion.Maui.GoogleMaps.Clustering/) and add this line:
+```csharp
+builder.UseGoogleMapsClustering();
+```
+For more information on clustering and regular map usage check out sample app:
 
 * [MauiGoogleMapSample](https://github.com/themronion/Maui.GoogleMaps/tree/maui/sample/MauiGoogleMapSample)
 

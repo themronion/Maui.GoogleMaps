@@ -6,11 +6,6 @@ using CoreLocation;
 using Foundation;
 using Google.Maps.Utils;
 using Google.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UIKit;
 
 namespace Maui.GoogleMaps.Clustering.Platforms.iOS.Clustering

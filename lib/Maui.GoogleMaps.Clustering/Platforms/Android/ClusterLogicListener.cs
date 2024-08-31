@@ -2,11 +2,6 @@
 // Original author code from https://github.com/sferhah
 //
 using Android.Gms.Maps.Utils.Clustering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maui.GoogleMaps.Clustering.Platforms.Android
 {
