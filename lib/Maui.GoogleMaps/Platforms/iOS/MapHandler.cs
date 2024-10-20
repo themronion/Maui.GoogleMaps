@@ -30,10 +30,7 @@ namespace Maui.GoogleMaps.Handlers
 
         public IList<BaseLogic<MapView>> Logics { get; set; }
 
-        protected override MapView CreatePlatformView()
-        {
-            return new MapView(CoreGraphics.CGRect.Empty);
-        }
+        protected override MapView CreatePlatformView() => new(new MapViewOptions());
 
         public override void PlatformArrange(Rect rect)
         {

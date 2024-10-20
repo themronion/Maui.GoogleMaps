@@ -11,10 +11,10 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <PackageId>Onion.Maui.GoogleMaps.Clustering</PackageId>
 	  <Title>Maui.GoogleMaps.Clustering</Title>
-	  <PackageVersion>6.0.0</PackageVersion>
+	  <PackageVersion>6.0.1</PackageVersion>
 	  <PackageReleaseNotes>
-# 6.0.0
-- Initial clustering support
+# 6.0.1
+- Updated google maps ios sdk to 9.1.1
 	  </PackageReleaseNotes>
 	  <Authors>themronion</Authors>
 	  <Copyright>Copyright 2022-2024</Copyright>
@@ -38,12 +38,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-		<PackageReference Include="Xamarin.Google.Maps.Utils" Version="1.3.8" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
-		<PackageReference Include="Xamarin.Google.Maps.Utils" Version="1.3.8" />
+	<ItemGroup Condition="'$(TargetFramework)' != 'net8.0'">
+		<PackageReference Include="Xamarin.Google.Maps.Utils" Version="1.3.9" />
 	</ItemGroup>
 
   <ItemGroup>

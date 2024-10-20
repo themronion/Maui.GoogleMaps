@@ -10,10 +10,10 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>Onion.Maui.GoogleMaps</PackageId>
 		<Title>Maui.GoogleMaps</Title>
-		<PackageVersion>6.0.0</PackageVersion>
+		<PackageVersion>6.0.1</PackageVersion>
 		<PackageReleaseNotes>
-# 6.0.0
-- Clustering support (in separate nuget)
+# 6.0.1
+- Updated google maps ios sdk to 9.1.1
 		</PackageReleaseNotes>
 		<Authors>themronion</Authors>
 		<Copyright>Copyright 2022-2024</Copyright>
@@ -42,7 +42,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
-	  <PackageReference Include="Xamarin.Google.iOS.Maps" Version="6.0.1.1" />
+	  <PackageReference Include="AdamE.Google.iOS.Maps" Version="9.1.1.2" />
 	  <PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
 	</ItemGroup>
 
