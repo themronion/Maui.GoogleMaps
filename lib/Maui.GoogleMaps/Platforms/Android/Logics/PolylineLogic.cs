@@ -1,7 +1,7 @@
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Maui.GoogleMaps.Android;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+using Microsoft.Maui.Platform;
 using NativePolyline = Android.Gms.Maps.Model.Polyline;
 using NativePatternItem = Android.Gms.Maps.Model.PatternItem;
 
@@ -39,7 +39,7 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
             opts.Add(new LatLng(p.Latitude, p.Longitude));
 
         opts.InvokeWidth(outerItem.StrokeWidth * this.ScaledDensity); // TODO: convert from px to pt. Is this collect? (looks like same iOS Maps)
-        opts.InvokeColor(outerItem.StrokeColor.ToAndroid());
+        opts.InvokeColor(outerItem.StrokeColor.ToPlatform());
         opts.Clickable(outerItem.IsClickable);
         opts.InvokeZIndex(outerItem.ZIndex);
         opts.InvokePattern(GenerateLinePattern(outerItem.StrokePattern));
@@ -91,7 +91,7 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
 
     internal override void OnUpdateStrokeColor(Polyline outerItem, NativePolyline nativeItem)
     {
-        nativeItem.Color = outerItem.StrokeColor.ToAndroid();
+        nativeItem.Color = outerItem.StrokeColor.ToPlatform();
     }
 
     internal override void OnUpdateStrokeWidth(Polyline outerItem, NativePolyline nativeItem)

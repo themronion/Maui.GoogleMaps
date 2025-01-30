@@ -2,7 +2,7 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Maui.GoogleMaps.Android;
 using Maui.GoogleMaps.Android.Extensions;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+using Microsoft.Maui.Platform;
 using NativePolygon = Android.Gms.Maps.Model.Polygon;
 
 namespace Maui.GoogleMaps.Logics.Android;
@@ -44,8 +44,8 @@ public class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
         }
 
         opts.InvokeStrokeWidth(outerItem.StrokeWidth * this.ScaledDensity); // TODO: convert from px to pt. Is this collect? (looks like same iOS Maps)
-        opts.InvokeStrokeColor(outerItem.StrokeColor.ToAndroid());
-        opts.InvokeFillColor(outerItem.FillColor.ToAndroid());
+        opts.InvokeStrokeColor(outerItem.StrokeColor.ToPlatform());
+        opts.InvokeFillColor(outerItem.FillColor.ToPlatform());
         opts.Clickable(outerItem.IsClickable);
         opts.InvokeZIndex(outerItem.ZIndex);
 
@@ -111,7 +111,7 @@ public class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
 
     internal override void OnUpdateStrokeColor(Polygon outerItem, NativePolygon nativeItem)
     {
-        nativeItem.StrokeColor = outerItem.StrokeColor.ToAndroid();
+        nativeItem.StrokeColor = outerItem.StrokeColor.ToPlatform();
     }
 
     internal override void OnUpdateStrokeWidth(Polygon outerItem, NativePolygon nativeItem)
@@ -122,7 +122,7 @@ public class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
 
     internal override void OnUpdateFillColor(Polygon outerItem, NativePolygon nativeItem)
     {
-        nativeItem.FillColor = outerItem.FillColor.ToAndroid();
+        nativeItem.FillColor = outerItem.FillColor.ToPlatform();
     }
 
     internal override void OnUpdateZIndex(Polygon outerItem, NativePolygon nativeItem)

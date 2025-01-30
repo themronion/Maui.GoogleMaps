@@ -113,7 +113,7 @@ namespace Maui.GoogleMaps.Handlers
                 Map.OnSnapshot -= OnSnapshot;
                 foreach (var logic in Logics)
                 {
-                    logic.Unregister(NativeMap, Map);
+                    logic.Unregister(platformView, Map);
                 }
             }
             _cameraLogic.Unregister();

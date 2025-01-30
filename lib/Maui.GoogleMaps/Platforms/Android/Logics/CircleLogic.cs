@@ -2,7 +2,7 @@ using Android.Gms.Maps.Model;
 using NativeCircle = Android.Gms.Maps.Model.Circle;
 using Maui.GoogleMaps.Android;
 using Android.Gms.Maps;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+using Microsoft.Maui.Platform;
 
 namespace Maui.GoogleMaps.Logics.Android;
 
@@ -40,8 +40,8 @@ public class CircleLogic : DefaultCircleLogic<NativeCircle, GoogleMap>
         opts.InvokeCenter(new LatLng(outerItem.Center.Latitude, outerItem.Center.Longitude));
         opts.InvokeRadius(outerItem.Radius.Meters);
         opts.InvokeStrokeWidth(outerItem.StrokeWidth * this.ScaledDensity); // TODO: convert from px to pt. Is this collect? (looks like same iOS Maps)
-        opts.InvokeStrokeColor(outerItem.StrokeColor.ToAndroid());
-        opts.InvokeFillColor(outerItem.FillColor.ToAndroid());
+        opts.InvokeStrokeColor(outerItem.StrokeColor.ToPlatform());
+        opts.InvokeFillColor(outerItem.FillColor.ToPlatform());
         opts.Clickable(outerItem.IsClickable);
         opts.InvokeZIndex(outerItem.ZIndex);
 
@@ -81,10 +81,10 @@ public class CircleLogic : DefaultCircleLogic<NativeCircle, GoogleMap>
         => nativeItem.StrokeWidth = outerItem.StrokeWidth;
 
     protected override void OnUpdateStrokeColor(Circle outerItem, NativeCircle nativeItem)
-        => nativeItem.StrokeColor = outerItem.StrokeColor.ToAndroid();
+        => nativeItem.StrokeColor = outerItem.StrokeColor.ToPlatform();
 
     protected override void OnUpdateFillColor(Circle outerItem, NativeCircle nativeItem)
-        => nativeItem.FillColor = outerItem.FillColor.ToAndroid();
+        => nativeItem.FillColor = outerItem.FillColor.ToPlatform();
 
     protected override void OnUpdateCenter(Circle outerItem, NativeCircle nativeItem)
         => nativeItem.Center = outerItem.Center.ToLatLng();

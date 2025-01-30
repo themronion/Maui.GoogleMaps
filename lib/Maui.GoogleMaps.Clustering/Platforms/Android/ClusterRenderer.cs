@@ -6,7 +6,7 @@ using Android.Gms.Maps.Model;
 using Android.Gms.Maps.Utils.Clustering;
 using Android.Gms.Maps.Utils.Clustering.View;
 using Maui.GoogleMaps.Android.Factories;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+using Microsoft.Maui.Platform;
 using NativeBitmapDescriptor = Android.Gms.Maps.Model.BitmapDescriptor;
 
 namespace Maui.GoogleMaps.Clustering.Platforms.Android
@@ -127,7 +127,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             => cluster.Size <= map.ClusterOptions.Buckets[0] ? cluster.Size : map.ClusterOptions.Buckets[BucketIndexForSize(cluster.Size)];
 
         public override int GetColor(int size)
-            => map.ClusterOptions.BucketColors[BucketIndexForSize(size)].ToAndroid();
+            => map.ClusterOptions.BucketColors[BucketIndexForSize(size)].ToPlatform();
 
         private string GetClusterText(ICluster cluster)
             => GetClusterText(cluster.Size);
