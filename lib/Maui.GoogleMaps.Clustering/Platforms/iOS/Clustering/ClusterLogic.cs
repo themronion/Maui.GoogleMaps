@@ -231,10 +231,11 @@ namespace Maui.GoogleMaps.Clustering.Platforms.iOS.Clustering
         {
             if (marker?.UserData is IGMUCluster cluster)
             {
-                ClusteredMapp.SendClusterClicked((int)cluster.Count,
-                    cluster.Items.Cast<IGMUCluster>().Select(x => itemsDictionary[(ClusteredMarker)x]),
-                    new Position(cluster.Position.Latitude, cluster.Position.Longitude));
-
+                var count = (int)cluster.Count;
+                var items = cluster.Items.Select(x => itemsDictionary[(ClusteredMarker)x]);
+                var position = new Position(cluster.Position.Latitude, cluster.Position.Longitude);
+                ClusteredMapp.SendClusterClicked(count, items, position);
+            
                 return true;
             }
 
