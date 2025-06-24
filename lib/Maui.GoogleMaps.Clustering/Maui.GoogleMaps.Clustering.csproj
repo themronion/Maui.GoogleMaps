@@ -11,11 +11,10 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <PackageId>Onion.Maui.GoogleMaps.Clustering</PackageId>
 	  <Title>Maui.GoogleMaps.Clustering</Title>
-	  <PackageVersion>6.2.0</PackageVersion>
+	  <PackageVersion>6.3.0</PackageVersion>
 	  <PackageReleaseNotes>
-# 6.2.0 
-- Updated dependencies and migrated to net9.0
-- Bug fixes
+# 6.3.0
+- Updated dependencies
 	  </PackageReleaseNotes>
 	  <Authors>themronion</Authors>
 	  <Copyright>Copyright 2022-2025</Copyright>
@@ -36,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.80" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
