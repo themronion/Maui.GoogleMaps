@@ -96,6 +96,21 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, MapView>
         if (line.StrokePattern == null || line.StrokePattern.Type == LineTypes.Straight)
             return GeometryUtils.StyleSpans(line.Positions.ToMutablePath(), new[] { StrokeStyle.GetSolidColor(line.StrokeColor.ToPlatform()) }, new NSNumber[] { 10 }, LengthKind.Rhumb);
         else
-            return GeometryUtils.StyleSpans(line.Positions.ToMutablePath(), new[] { StrokeStyle.GetSolidColor(UIColor.Clear), StrokeStyle.GetSolidColor(line.StrokeColor.ToPlatform()) }, new NSNumber[] { line.StrokePattern.GapWidth, line.StrokePattern.DashWidth }, LengthKind.Rhumb);
+        {
+            var pattern = new List<NSNumber>();
+            var styles = new List<StrokeStyle>();
+
+            for (int i = 0; i < line.StrokePattern.Pattern.Count; i++)
+            {
+                var itemLength = line.StrokePattern.Pattern[i];
+                pattern.Add(new NSNumber(itemLength));
+                if (i % 2 == 0)
+                    styles.Add(StrokeStyle.GetSolidColor(line.StrokeColor.ToPlatform()));
+                else
+                    styles.Add(StrokeStyle.GetSolidColor(UIColor.Clear));
+            }
+
+            return GeometryUtils.StyleSpans(line.Positions.ToMutablePath(), styles.ToArray(), pattern.ToArray(), LengthKind.Rhumb);
+        }
     }
 }

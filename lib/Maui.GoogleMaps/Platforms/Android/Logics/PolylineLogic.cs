@@ -42,7 +42,7 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
         opts.InvokeColor(outerItem.StrokeColor.ToPlatform());
         opts.Clickable(outerItem.IsClickable);
         opts.InvokeZIndex(outerItem.ZIndex);
-        opts.InvokePattern(GenerateLinePattern(outerItem.StrokePattern));
+        opts.InvokePattern(GenerateLinePattern(outerItem));
 
         var nativePolyline = NativeMap.AddPolyline(opts);
 
@@ -106,16 +106,26 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
 
     internal override void OnUpdateLinePattern(Polyline outerItem, NativePolyline nativeItem)
     {
-        nativeItem.Pattern = GenerateLinePattern(outerItem.StrokePattern);
+        nativeItem.Pattern = GenerateLinePattern(outerItem);
     }
 
-    internal List<NativePatternItem> GenerateLinePattern(LinePattern pattern)
+    internal List<NativePatternItem> GenerateLinePattern(Polyline line)
     {
-        if (pattern == null || pattern.Type == LineTypes.Straight)
+        if (line.StrokePattern == null || line.StrokePattern.Type == LineTypes.Straight)
             return null;
-        else if (pattern.Type == LineTypes.Dashed)
-            return new List<NativePatternItem>() { new Dash(pattern.DashWidth), new Gap(pattern.GapWidth), new Dash(pattern.DashWidth) };
         else
-            return new List<NativePatternItem>() { new Dot(), new Gap(pattern.GapWidth), new Dot() };
+        {
+            var pattern = new List<NativePatternItem>();
+            for (int i = 0; i < line.StrokePattern.Pattern.Count; i++)
+            {
+                var itemLength = line.StrokePattern.Pattern[i];
+                if (i % 2 == 0)
+                    pattern.Add(line.StrokePattern.Type == LineTypes.Dashed ? (NativePatternItem)new Dash(itemLength) : new Dot());
+                else
+                    pattern.Add(new Gap(itemLength));
+            }
+
+            return pattern;
+        }
     }
 }

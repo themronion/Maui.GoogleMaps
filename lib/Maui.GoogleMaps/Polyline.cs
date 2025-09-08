@@ -98,22 +98,30 @@ public static class StrokePatternBuilder
         return null;
     }
 
-    public static LinePattern DashedLine(int gapWidth = 10, int dashWidth = 20)
+    public static LinePattern DashedLine(List<int> strokePattern)
     {
-        return new LinePattern { Type = LineTypes.Dashed, DashWidth = dashWidth, GapWidth = gapWidth };
+        return new LinePattern
+        {
+            Type = LineTypes.Dashed,
+            Pattern = strokePattern,
+        };
     }
 
-    public static LinePattern DottedLine(int gapWidth = 5, int dashWidth = 50)
+    public static LinePattern DottedLine(List<int> strokePattern)
     {
-        return new LinePattern { Type = LineTypes.Dotted, GapWidth = gapWidth, DashWidth = dashWidth };
+        return new LinePattern
+        {
+            Type = LineTypes.Dotted,
+            Pattern = strokePattern
+        };
     }
 }
+
 
 public class LinePattern
 {
     public int Type { get; set; }
-    public int GapWidth { get; set; }
-    public int DashWidth { get; set; }
+    public List<int> Pattern { get; set; }
 }
 
 public static class LineTypes

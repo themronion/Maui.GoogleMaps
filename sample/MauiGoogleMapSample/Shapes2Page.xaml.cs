@@ -43,17 +43,17 @@ namespace MauiGoogleMapSample
             polylineDashed.Positions.Add(new Position(36.20, 139.83));
             polylineDashed.Positions.Add(new Position(36.30, 139.93));
             polylineDashed.Positions.Add(new Position(36.40, 140.03));
-            polylineDashed.StrokePattern = StrokePatternBuilder.DashedLine();
+            polylineDashed.StrokePattern = StrokePatternBuilder.DashedLine(new List<int> { 10, 3, 4, 3 });
             map.Polylines.Add(polylineDashed);
 
             //Add Dotted Polyline (appears as dashed on iOS)
             var polylineDotted = new Polyline();
             polylineDotted.StrokeWidth = 10f;
-            polylineDotted.StrokeColor = Colors.Orange;
-            polylineDotted.Positions.Add(new Position(36.50, 139.83));
-            polylineDotted.Positions.Add(new Position(36.60, 139.93));
-            polylineDotted.Positions.Add(new Position(36.70, 140.03));
-            polylineDotted.StrokePattern = StrokePatternBuilder.DottedLine();
+            polylineDotted.StrokeColor = Colors.Red;
+            polylineDotted.Positions.Add(new Position(46.50, 141.83));
+            polylineDotted.Positions.Add(new Position(46.60, 142.93));
+            polylineDotted.Positions.Add(new Position(46.70, 143.03));
+            polylineDotted.StrokePattern = StrokePatternBuilder.DottedLine(new List<int> { 20, 10, 1, 2, 3 });
             map.Polylines.Add(polylineDotted);
 
             // Add Circles
