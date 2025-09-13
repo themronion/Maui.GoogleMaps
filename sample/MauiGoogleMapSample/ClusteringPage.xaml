@@ -14,6 +14,7 @@
                     VerticalOptions="FillAndExpand" />
 
             <Button x:Name="buttonAddPins" Text="Add Pins" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+            <Button x:Name="showHidePin6" Text="Show/Hide Pin6" HorizontalOptions="FillAndExpand" VerticalOptions="End" Clicked="showHidePin6_Clicked" />
         </Grid>
 
     </ContentPage.Content>

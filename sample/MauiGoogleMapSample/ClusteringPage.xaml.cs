@@ -5,6 +5,7 @@ namespace MauiGoogleMapSample;
 
 public partial class ClusteringPage : ContentPage
 {
+    Pin pin6 = null;
     public ClusteringPage()
     {
         InitializeComponent();
@@ -67,14 +68,14 @@ public partial class ClusteringPage : ContentPage
                 Position = new Position(36.6748851300317, 4.390352156036844),
                 Tag = "id_5"
             });
-
-            map.Pins.Add(new Pin
+            pin6 = new Pin
             {
                 Type = PinType.Place,
                 Label = "Pin 6",
                 Position = new Position(36.6248851300317, 4.440352156036844),
                 Tag = "id_6"
-            });
+            };
+            map.Pins.Add(pin6);
 
 
             map.MoveToRegion(MapSpan.FromCenterAndRadius(map.Pins.First().Position, Distance.FromMeters(20_000)));
@@ -86,6 +87,11 @@ public partial class ClusteringPage : ContentPage
     private void Map_ClusterClicked(object sender, ClusterClickedEventArgs e)
     {
         DisplayAlert($"{e.Pins.Count()} pins:", string.Join("\n", e.Pins.Select(p => p.Label)), "Ok");
+    }
+
+    private void showHidePin6_Clicked(object sender, EventArgs e)
+    {
+        pin6.IsVisible = !pin6.IsVisible;
     }
 }
 

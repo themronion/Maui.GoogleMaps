@@ -44,6 +44,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             marker.Snippet = clusteredMarker.Snippet;
             marker.Draggable = clusteredMarker.Draggable;
             marker.Rotation = clusteredMarker.Rotation;
+            marker.Visible = clusteredMarker.Visible;
             marker.SetAnchor(clusteredMarker.AnchorX, clusteredMarker.AnchorY);
             //marker.SetInfoWindowAnchor(clusteredMarker.InfoWindowAnchorX, clusteredMarker.InfoWindowAnchorY);
             marker.Flat = clusteredMarker.Flat;
