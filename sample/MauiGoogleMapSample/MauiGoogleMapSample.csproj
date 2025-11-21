@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
+		<TargetFrameworks>net10.0-android;net10.0-ios</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MauiGoogleMapSample</RootNamespace>
@@ -24,7 +24,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-ios'">
 		<RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
 	</PropertyGroup>
 
@@ -58,7 +58,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
