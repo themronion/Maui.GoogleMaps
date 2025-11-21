@@ -47,7 +47,8 @@ public class CircleLogic : DefaultCircleLogic<NativeCircle, MapView>
     protected override NativeCircle DeleteNativeItem(Circle outerItem)
     {
         var nativeCircle = outerItem.NativeObject as NativeCircle;
-        nativeCircle.Map = null;
+        nativeCircle?.Map = null;
+
         return nativeCircle;
     }
 
