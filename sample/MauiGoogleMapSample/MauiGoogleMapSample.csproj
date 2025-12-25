@@ -21,11 +21,15 @@
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-ios'">
+	<PropertyGroup Condition="$(TargetFramework.Contains('ios'))">
 		<RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('android'))">
+		<AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -47,18 +51,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Remove="Resources\Styles\Colors.xaml" />
-	  <EmbeddedResource Remove="Resources\Styles\Styles.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <EmbeddedResource Include="marker01.png" />
 	  <EmbeddedResource Include="marker02.png" />
 	  <EmbeddedResource Include="marker03.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
 	</ItemGroup>
 
 	<ItemGroup>
