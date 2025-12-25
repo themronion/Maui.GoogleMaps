@@ -16,7 +16,7 @@ Usage is almost the same as [Xamarin.Forms.GoogleMaps - github](https://github.c
 |Others|No|
 
 ## Setup
-* Target .NET 8 for best experience
+* Target .NET 10
 * Install into your MAUI project by downloading the library from nuget: [![NuGet](https://img.shields.io/nuget/v/Onion.Maui.GoogleMaps.svg?label=NuGet)](https://www.nuget.org/packages/Onion.Maui.GoogleMaps/)
 * Finish the [Google Cloud Console setup](https://developers.google.com/maps/get-started#create-project)
 * Get your API Keys from Google, then in Platforms/Android: 
