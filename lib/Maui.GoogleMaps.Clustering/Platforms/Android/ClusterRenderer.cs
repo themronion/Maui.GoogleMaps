@@ -46,7 +46,6 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             marker.Rotation = clusteredMarker.Rotation;
             marker.Visible = clusteredMarker.Visible;
             marker.SetAnchor(clusteredMarker.AnchorX, clusteredMarker.AnchorY);
-            //marker.SetInfoWindowAnchor(clusteredMarker.InfoWindowAnchorX, clusteredMarker.InfoWindowAnchorY);
             marker.Flat = clusteredMarker.Flat;
             marker.Alpha = clusteredMarker.Alpha;
             marker.SetIcon(clusteredMarker.Icon);
@@ -56,7 +55,8 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
         {
             if (map.ClusterOptions.RendererCallback != null)
             {
-                var descriptorFromCallback = map.ClusterOptions.RendererCallback(map.ClusterOptions.EnableBuckets ? GetClusterText(cluster) : cluster.Size.ToString());
+                var descriptorFromCallback = map.ClusterOptions.RendererCallback(
+                    map.ClusterOptions.EnableBuckets ? GetClusterText(cluster) : cluster.Size.ToString());
 
                 options.SetIcon(GetIcon(cluster, descriptorFromCallback));
             }
@@ -70,7 +70,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             }
         }
 
-        private NativeBitmapDescriptor GetIcon(ICluster cluster, BitmapDescriptor descriptor)
+        private NativeBitmapDescriptor GetIcon(ICluster cluster, Maui.GoogleMaps.BitmapDescriptor descriptor)
         {
             var clusterText = GetClusterText(cluster);
 
@@ -112,7 +112,6 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
                 .Draggable(clusteredMarker.Draggable)
                 .SetRotation(clusteredMarker.Rotation)
                 .Anchor(clusteredMarker.AnchorX, clusteredMarker.AnchorY)
-                //  .InfoWindowAnchor(clusteredMarker.InfoWindowAnchorX, clusteredMarker.InfoWindowAnchorY)
                 .SetAlpha(clusteredMarker.Alpha)
                 .Flat(clusteredMarker.Flat);
 

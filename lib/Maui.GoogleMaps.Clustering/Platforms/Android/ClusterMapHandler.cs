@@ -7,6 +7,7 @@ using Android.Gms.Maps.Utils.Data.GeoJson;
 using Maui.GoogleMaps.Clustering.Platforms.Android;
 using Maui.GoogleMaps.Logics;
 using Maui.GoogleMaps.Logics.Android;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Maui.GoogleMaps.Clustering
 {
@@ -64,15 +65,26 @@ namespace Maui.GoogleMaps.Clustering
             base.OnMapReady();
             var cluster = VirtualView as ClusteredMap;
         }
-        public override void InitLogics() => Logics = new List<BaseLogic<GoogleMap>>
+        public override void InitLogics()
         {
-            new PolylineLogic(),
-            new PolygonLogic(),
-            new CircleLogic(),
-            new ClusterLogic(this.Context, Config.GetBitmapdescriptionFactory(), OnClusteredMarkerCreating, OnClusteredMarkerCreated, OnClusteredMarkerDeleting, OnClusteredMarkerDeleted),
-            new TileLayerLogic(),
-            new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
-        };
+            var clusteringOptions = MauiContext?.Services.GetService<GoogleMapsClusteringOptions>();
+            Logics = new List<BaseLogic<GoogleMap>>
+            {
+                new PolylineLogic(),
+                new PolygonLogic(),
+                new CircleLogic(),
+                new ClusterLogic(
+                    Context,
+                    Config.GetBitmapdescriptionFactory(),
+                    OnClusteredMarkerCreating,
+                    OnClusteredMarkerCreated,
+                    OnClusteredMarkerDeleting,
+                    OnClusteredMarkerDeleted,
+                    clusteringOptions),
+                new TileLayerLogic(),
+                new GroundOverlayLogic(Config.GetBitmapdescriptionFactory())
+            };
+        }
 
     }   
 }

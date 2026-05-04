@@ -42,13 +42,13 @@
         /// Gets or sets the renderer image.
         /// </summary>
         /// <value>The renderer image.</value>
-        internal BitmapDescriptor RendererImage { get; set; }
+        public BitmapDescriptor? RendererImage { get; set; }
 
         /// <summary>
         /// Gets or sets the renderer callback.
         /// </summary>
         /// <value>The renderer callback.</value>
-        internal Func<string, BitmapDescriptor> RendererCallback { get; set; }
+        public Func<string, BitmapDescriptor>? RendererCallback { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum cluster size.

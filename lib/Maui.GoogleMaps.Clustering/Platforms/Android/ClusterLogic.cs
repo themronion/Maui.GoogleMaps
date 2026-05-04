@@ -14,6 +14,7 @@ using Maui.GoogleMaps.Android.Extensions;
 using Maui.GoogleMaps.Android.Factories;
 using Maui.GoogleMaps.Clustering.Logics;
 using Maui.GoogleMaps.Logics;
+using Maui.GoogleMaps.Clustering;
 
 namespace Maui.GoogleMaps.Clustering.Platforms.Android
 {
@@ -40,6 +41,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
         private ClusterRenderer clusterRenderer;
 
         private readonly Dictionary<string, Pin> itemsDictionary = new Dictionary<string, Pin>();
+        private readonly GoogleMapsClusteringOptions? clusteringOptions;
 
         public ClusterLogic(
             Context context,
@@ -47,7 +49,8 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             Action<Pin, MarkerOptions> onMarkerCreating,
             Action<Pin, ClusteredMarker> onMarkerCreated,
             Action<Pin, ClusteredMarker> onMarkerDeleting,
-            Action<Pin, ClusteredMarker> onMarkerDeleted)
+            Action<Pin, ClusteredMarker> onMarkerDeleted,
+            GoogleMapsClusteringOptions? clusteringOptions = null)
         {
             this.bitmapDescriptorFactory = bitmapDescriptorFactory;
             this.context = context;
@@ -55,6 +58,7 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             this.onMarkerCreated = onMarkerCreated;
             this.onMarkerDeleting = onMarkerDeleting;
             this.onMarkerDeleted = onMarkerDeleted;
+            this.clusteringOptions = clusteringOptions;
         }
 
         public override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap, IElementHandler handler)
@@ -91,11 +95,19 @@ namespace Maui.GoogleMaps.Clustering.Platforms.Android
             newNativeMap.MarkerDragEnd += OnMarkerDragEnd;
             newNativeMap.MarkerDrag += OnMarkerDrag;
 
-            clusterRenderer = new ClusterRenderer(context,
-                ClusteredMapp,
-                NativeMap,
-                clusterManager,
-                handler.MauiContext);
+            var createRenderer = clusteringOptions?.CreateAndroidClusterRenderer;
+            clusterRenderer = createRenderer?.Invoke(new AndroidClusterRendererCreateContext(
+                    context,
+                    ClusteredMapp,
+                    NativeMap,
+                    clusterManager,
+                    handler.MauiContext))
+                ?? new ClusterRenderer(
+                    context,
+                    ClusteredMapp,
+                    NativeMap,
+                    clusterManager,
+                    handler.MauiContext);
             clusterManager.Renderer = clusterRenderer;
 
             clusterManager.SetOnClusterClickListener(clusterListener);
