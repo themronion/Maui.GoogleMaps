@@ -43,6 +43,7 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
         opts.Clickable(outerItem.IsClickable);
         opts.InvokeZIndex(outerItem.ZIndex);
         opts.InvokePattern(GenerateLinePattern(outerItem));
+        opts.Geodesic(outerItem.IsGeodesic);
 
         var nativePolyline = NativeMap.AddPolyline(opts);
 
@@ -107,6 +108,11 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
     internal override void OnUpdateLinePattern(Polyline outerItem, NativePolyline nativeItem)
     {
         nativeItem.Pattern = GenerateLinePattern(outerItem);
+    }
+
+    internal override void OnUpdateIsGeodesic(Polyline outerItem, NativePolyline nativeItem)
+    {
+        nativeItem.Geodesic = outerItem.IsGeodesic;
     }
 
     internal List<NativePatternItem> GenerateLinePattern(Polyline line)

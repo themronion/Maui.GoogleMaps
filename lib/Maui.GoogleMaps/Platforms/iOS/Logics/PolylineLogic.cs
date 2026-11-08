@@ -1,4 +1,4 @@
-﻿using Google.Maps;
+using Google.Maps;
 using Microsoft.Maui.Platform;
 using Maui.GoogleMaps.iOS.Extensions;
 using NativePolyline = Google.Maps.Polyline;
@@ -39,6 +39,7 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, MapView>
         nativePolyline.Tappable = outerItem.IsClickable;
         nativePolyline.ZIndex = outerItem.ZIndex;
         nativePolyline.Spans = GenerateLinePattern(outerItem);
+        nativePolyline.Geodesic = outerItem.IsGeodesic;
 
         outerItem.NativeObject = nativePolyline;
         nativePolyline.Map = NativeMap;
@@ -89,6 +90,11 @@ public class PolylineLogic : DefaultPolylineLogic<NativePolyline, MapView>
     internal override void OnUpdateLinePattern(Polyline outerItem, NativePolyline nativeItem)
     {
         nativeItem.Spans = GenerateLinePattern(outerItem);
+    }
+
+    internal override void OnUpdateIsGeodesic(Polyline outerItem, NativePolyline nativeItem)
+    {
+        nativeItem.Geodesic = outerItem.IsGeodesic;
     }
 
     internal StyleSpan[] GenerateLinePattern(Polyline line)
