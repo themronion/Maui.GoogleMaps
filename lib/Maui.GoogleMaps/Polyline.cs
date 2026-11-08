@@ -10,6 +10,7 @@ public sealed class Polyline : BindableObject
     public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Polyline), false);
     public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Polyline), 0);
     public static readonly BindableProperty StrokePatternProperty = BindableProperty.Create(nameof(StrokePattern), typeof(LinePattern), typeof(Polyline), StrokePatternBuilder.SolidLine());
+    public static readonly BindableProperty IsGeodesicProperty = BindableProperty.Create(nameof(IsGeodesic), typeof(bool), typeof(Polyline), false);
 
     private readonly ObservableCollection<Position> _positions = new ObservableCollection<Position>();
 
@@ -43,6 +44,12 @@ public sealed class Polyline : BindableObject
     {
         get { return (LinePattern)GetValue(StrokePatternProperty); }
         set { SetValue(StrokePatternProperty, value); }
+    }
+
+    public bool IsGeodesic
+    {
+        get { return (bool)GetValue(IsGeodesicProperty); }
+        set { SetValue(IsGeodesicProperty, value); }
     }
 
     public IList<Position> Positions

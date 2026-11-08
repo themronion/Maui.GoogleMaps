@@ -19,6 +19,7 @@ public abstract class DefaultPolylineLogic<TNative, TNativeMap> : DefaultLogic<P
         else if (e.PropertyName == Polyline.StrokeWidthProperty.PropertyName) OnUpdateStrokeWidth(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.ZIndexProperty.PropertyName) OnUpdateZIndex(outerItem, nativeItem);
         else if (e.PropertyName == Polyline.StrokePatternProperty.PropertyName) OnUpdateLinePattern(outerItem, nativeItem);
+        else if (e.PropertyName == Polyline.IsGeodesicProperty.PropertyName) OnUpdateIsGeodesic(outerItem, nativeItem);
 
     }
 
@@ -35,4 +36,5 @@ public abstract class DefaultPolylineLogic<TNative, TNativeMap> : DefaultLogic<P
     internal abstract void OnUpdateStrokeWidth(Polyline outerItem, TNative nativeItem);
     internal abstract void OnUpdateZIndex(Polyline outerItem, TNative nativeItem);
     internal abstract void OnUpdateLinePattern(Polyline outerItem, TNative nativeItem);
+    internal abstract void OnUpdateIsGeodesic(Polyline outerItem, TNative nativeItem);
 }
